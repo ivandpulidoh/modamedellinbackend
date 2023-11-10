@@ -1,7 +1,8 @@
 @extends('plantilla')
 @section('titulo', "$titulo")
 @section('scripts')
-<script>
+
+<script>//inicio menu
     globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
     <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0";?>
 </script>
@@ -22,6 +23,7 @@
     <li class="btn-item"><a title="Salir" href="#" class="fa fa-arrow-circle-o-left" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
+//fin menu
 function fsalir(){
     location.href ="/admin/sistema/menu";
 }

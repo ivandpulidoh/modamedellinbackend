@@ -78,7 +78,7 @@ class Pedido extends Model{
                 fk_cliente,
                 fk_sucursal,
                 estado
-            ) VALUES (?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->idpedido,
             $this->fk_cliente,

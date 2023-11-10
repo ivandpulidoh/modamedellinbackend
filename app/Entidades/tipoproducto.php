@@ -68,7 +68,7 @@ class Tipoproducto extends Model
                idtipoproducto,
                 nombre,
            
-            ) VALUES (?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?);";
         $result = DB::insert($sql, [
             $this->idtipoproducto,
             $this->nombre,

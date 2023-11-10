@@ -80,7 +80,7 @@ class Producto extends Model
                 nombre,
                 precio,
                 fk_tipoproducto
-            ) VALUES (?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->idproducto,
             $this->nombre,

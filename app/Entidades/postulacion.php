@@ -81,7 +81,7 @@ class Postulacion extends Model{
                 apellido,
                 whatsapp,
                 clave
-            ) VALUES (?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->idpostulacion,
             $this->nombre,

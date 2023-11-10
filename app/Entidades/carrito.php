@@ -75,7 +75,7 @@ class Carrito extends Model{
                idcarrito,
                 fk_cliente,
                 fk_producto
-            ) VALUES (?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?, ?);";
         $result = DB::insert($sql, [
             $this->idcarrito,
             $this->fk_cliente,

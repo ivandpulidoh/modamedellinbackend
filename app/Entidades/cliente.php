@@ -94,7 +94,7 @@ class Cliente extends Model
                 direccion,
                 dni,
                 clave
-            ) VALUES (?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?, ?, ?, ?,?);";
         $result = DB::insert($sql, [
             $this->idcliente,
             $this->nombre,

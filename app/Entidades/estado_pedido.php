@@ -66,7 +66,7 @@ protected $table = 'estado_pedidos';
                idestadopedido,
                 nombre,
               +
-            ) VALUES (?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?);";
         $result = DB::insert($sql, [
             $this->idestadopedido,
             $this->nombre,
