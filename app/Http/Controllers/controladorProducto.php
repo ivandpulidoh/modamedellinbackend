@@ -2,35 +2,34 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
-use App\Entidades\Cliente;
+use App\Entidades\producto;
+use App\Entidades\tipoproducto;
 require app_path().'/start/constants.php';
 
 
-class ControladorCliente extends controller
+class controladorProducto extends Controller
 {
 	public function nuevo()
 	{
-		$titulo = "Nuevo cliente";
-		return view("sistema.cliente-nuevo", compact("titulo"));
+		$titulo = "Nuevo Producto";
+		$categoria = new tipoproducto();
+		$aCategorias = $categoria->obtenerTodos();
+
+		return view("sistema.producto-nuevo", compact("titulo", "aCategorias"));
 	}
 
-	public function index(){
-	$tiutlo = "Listado de clientes";
-	return view ("sistema.cliente-listar", compact("titulo"));
-	}
-
-
-		    public function guardar(Request $request) 
+			    public function guardar(Request $request) 
 {
         try {
             //Define la entidad servicio
-            $titulo = "Modificar cliente";
-            $entidad = new Cliente();
+            $titulo = "Modificar producto";
+            $entidad = new Producto;
             $entidad->cargarDesdeRequest($request);
 
             //validaciones
-            if ($entidad->nombre == "" || $entidad->telefono == "" || $entidad->clave == ""|| $entidad->direccion == ""|| $entidad->dni == "" || $entidad->correo == ""   )  {
+            if ($entidad->nombre == "" ||  $entidad->fk_tipoproducto == ""|| $entidad->cantidad == ""|| $entidad->precio == ""  )  {
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = "Complete todos los datos";
             } else {
@@ -48,21 +47,21 @@ class ControladorCliente extends controller
                     $msg["MSG"] = OKINSERT;
                 }
               
-                $_POST["id"] = $entidad->idcliente;
-                return view('sistema.cliente-listar', compact('titulo', 'msg'));
+                $_POST["id"] = $entidad->idproducto;
+                return view('sistema.producto-listar', compact('titulo', 'msg'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = ERRORINSERT;
         }
 
-        $id = $entidad->idcliente;
-        $cliente = new Cliente();
-        $cliente->obtenerPorId($id);
+        $id = $entidad->idproducto;
+        $producto = new producto();
+        $producto->obtenerPorId($id);
 
         
 
-        return view('sistema.cliente-nuevo', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
+        return view('sistema.producto-nuevo', compact('msg', 'producto', 'titulo')) . '?id=' . $producto->idproducto;
 
     }
 

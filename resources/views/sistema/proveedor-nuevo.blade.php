@@ -2,14 +2,14 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-	globalId = '<?php echo isset($cliente->idcliente) && $cliente->idcliente > 0 ? $cliente->idcliente : 0; ?>';
-	<?php $globalId = isset($cliente->idcliente) ? $cliente->idcliente : "0"; ?>
+	globalId = '<?php echo isset($proveedor->idproveedor) && $proveedor->idproveedor > 0 ? $proveedor->idproveedor : 0; ?>';
+	<?php $globalId = isset($proveedor->idproveedor) ? $proveedor->idproveedor : "0"; ?>
 </script>
 @endsection
 @section('breadcrumb')
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="/admin/home">Inicio</a></li>
-	<li class="breadcrumb-item"><a href="/admin/clientes">Clientes</a></li>
+	<li class="breadcrumb-item"><a href="/admin/proveedor">proveedor</a></li>
 	<li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
@@ -23,7 +23,7 @@
 </ol>
 <script>
 	function fsalir() {
-		location.href = "/admin/cliente";
+		location.href = "/admin/proveedor";
 	}
 </script>
 @endsection
@@ -45,17 +45,17 @@ if (isset($msg)) {
 		</div>
 
 		<div class="form-group col-lg-6">
-			<label>Telefono: *</label>
-			<input type="text" id="txtTelefono" name="txtTelefono" class="form-control" value="" required>
+			<label>Domicilio: *</label>
+			<input type="text" id="txtDomicilio" name="txtDomicilio" class="form-control" value="" required>
 		</div>
 		<div class="form-group col-lg-6">
-			<label>Direccion: *</label>
-			<input type="text" id="txtDireccion" name="txtDireccion" class="form-control" value="" required>
+			<label>Cuit: *</label>
+			<input type="text" id="txtCuit" name="txtCuit" class="form-control" value="" required>
 		</div>
 
 		<div class="form-group col-lg-6">
-			<label>Dni: *</label>
-			<input type="text" id="txtDni" name="txtDni" class="form-control" value="" required>
+			<label>rubro: *</label>
+			<input type="text" id="txtrubro" name="txtrubro" class="form-control" value="" required>
 		</div>
 
 

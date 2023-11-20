@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entidades\Entidades;
+namespace App\Entidades;
 
 
 use DB;
@@ -25,6 +25,17 @@ class Cliente extends Model
     protected $hidden = [
 
     ];
+
+    public function cargarDesdeRequest($request) {
+        $this->idcliente = $request->input('id') != "0" ? $request->input('id') : $this->idmenu;
+        $this->nombre = $request->input('txtNombre');
+        $this->telefono = $request->input('txtTelefono');
+        $this->direccion = $request->input('txtDireccion');
+        $this->dni = $request->input('txtDni');
+        $this->correo = $request->input('txtCorreo');
+        $this->clave = $request->input('txtClave');
+    }
+
         public function obtenerTodos()
     {
         $sql = "SELECT
@@ -85,28 +96,35 @@ class Cliente extends Model
         $affected = DB::delete($sql, [$this->idcliente]);
     }
 
-     public function insertar()
-    {
+public function insertar()
+{
+    try {
         $sql = "INSERT INTO clientes (
-               idcliente,
-                nombre,
+               nombre,
                 telefono,
                 direccion,
                 dni,
+		    correo,
                 clave
-            ) VALUES (?, ?, ?, ?, ?,?);";
+            ) VALUES (?, ?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
-            $this->idcliente,
+
             $this->nombre,
             $this->telefono,
             $this->direccion,
             $this->dni,
-            $this->clave,
+            $this->correo,
+            $this->clave
         ]);
         return $this->idcliente = DB::getPdo()->lastInsertId();
+    } catch (\Exception $e) {
+        // Manejar el error
+        echo "Error al insertar: " . $e->getMessage();
     }
+}
 
-    
 
 }
+
+
 ?>

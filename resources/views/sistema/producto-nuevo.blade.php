@@ -2,14 +2,14 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-	globalId = '<?php echo isset($cliente->idcliente) && $cliente->idcliente > 0 ? $cliente->idcliente : 0; ?>';
-	<?php $globalId = isset($cliente->idcliente) ? $cliente->idcliente : "0"; ?>
+	globalId = '<?php echo isset($producto->idproducto) && $producto->idproducto > 0 ? $producto->idproducto : 0; ?>';
+	<?php $globalId = isset($producto->idproducto) ? $producto->idproducto : "0"; ?>
 </script>
 @endsection
 @section('breadcrumb')
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="/admin/home">Inicio</a></li>
-	<li class="breadcrumb-item"><a href="/admin/clientes">Clientes</a></li>
+	<li class="breadcrumb-item"><a href="/admin/productos">producto</a></li>
 	<li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
@@ -17,13 +17,13 @@
 	<li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
 	</li>
 	@if($globalId > 0)
-	<li class="btn-item"><a title="eliminar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a></li>
+	<li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a></li>
 	@endif
 	<li class="btn-item"><a title="Salir" href="#" class="fa fa-arrow-circle-o-left" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
 	function fsalir() {
-		location.href = "/admin/cliente";
+		location.href = "/admin/sistema/producto";
 	}
 </script>
 @endsection
@@ -45,30 +45,38 @@ if (isset($msg)) {
 		</div>
 
 		<div class="form-group col-lg-6">
-			<label>Telefono: *</label>
-			<input type="text" id="txtTelefono" name="txtTelefono" class="form-control" value="" required>
-		</div>
-		<div class="form-group col-lg-6">
-			<label>Direccion: *</label>
-			<input type="text" id="txtDireccion" name="txtDireccion" class="form-control" value="" required>
+			<label for="txtNombre">Tipo de producto: *</label>
+			<select name="txtTipoProducto" id="txtTipoProducto" class="form-control selectpicker">
+			<option value="" disabled selected>Seleccionar</option>
+			@foreach($aCategorias as $categoria)
+				<option value=" {{ $categoria->idtipoproducto  }} ">{{  $categoria->nombre}}</option>
+
+
+			@endforeach
+		</select>
 		</div>
 
 		<div class="form-group col-lg-6">
-			<label>Dni: *</label>
-			<input type="text" id="txtDni" name="txtDni" class="form-control" value="" required>
+			<label>Cantidad: *</label>
+			<input type="id" id="lstCantidad" name="lstCantidad" class="form-control" value="" required>
 		</div>
-
 
 		<div class="form-group col-lg-6">
-			<label>Correo: *</label>
-			<input type="text" id="txtCorreo" name="txtCorreo" class="form-control" value="" required>
+			<label>Precio *</label>
+			<input type="text" id="txtPrecio" name="txtPrecio" class="form-control" value="" required>
 		</div>
 
-	
 		<div class="form-group col-lg-6">
-			<label>Clave: *</label>
-			<input type="text" id="txtClave" name="txtClave" class="form-control" value="" required>
+			<label>Descripcion *</label>
+			<input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="" required>
 		</div>
+
+		<div>
+			<label for="">Archivo adjunto</label>
+			<input type="file" name="txtArchivo" id="txtArchivo"  accept=".jpg, .jpeg, .png">
+			<small class="d-block">Archivos admitidos: .jpg, .jpeg, .png</small>
+		</div>
+
 	</div>
 </form>
 <script>

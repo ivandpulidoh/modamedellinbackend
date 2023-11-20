@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entidades\Entidades;
+namespace App\Entidades;
 
 
 use DB;
