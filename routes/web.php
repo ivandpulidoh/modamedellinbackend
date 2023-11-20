@@ -102,4 +102,48 @@ Route::post('/admin/patente/nuevo/{id}', 'ControladorPatente@guardar');
 
  route::get('/admin/cliente/nuevo', 'controladorCliente@nuevo');
 
+/* --------------------------------------------- */
+/* CONTROLADOR PRODUCTOS                      */
+/* --------------------------------------------- */
+
+ route::get('/admin/producto/nuevo', 'controladorProducto@nuevo');
+
+/* --------------------------------------------- */
+/* CONTROLADOR PEDIDOS                      */
+/* --------------------------------------------- */
+
+ route::get('/admin/pedido/nuevo', 'controladorPedido@nuevo');
+
+/* --------------------------------------------- */
+/* CONTROLADOR POSTULACIONES                      */
+/* --------------------------------------------- */
+
+ route::get('/admin/postulacion/nuevo', 'controladorPostulacion@nuevo');
+
+/* --------------------------------------------- */
+/* CONTROLADOR SUCURSALES                      */
+/* --------------------------------------------- */
+
+ route::get('/admin/sucursal/nuevo', 'controladorSucursal@nuevo');
+
+/* --------------------------------------------- */
+/* CONTROLADOR CATEGORIAS                      */
+/* --------------------------------------------- */
+
+ route::get('/admin/categoria/nuevo', 'controladorCategoria@nuevo');
+
+/* --------------------------------------------- */
+/* CONTROLADOR PROVEEDORES                      */
+/* --------------------------------------------- */
+
+ route::get('/admin/proveedor/nuevo', 'controladorProveedor@nuevo');
+
+/* --------------------------------------------- */
+/* CONTROLADOR RUBROS                     */
+/* --------------------------------------------- */
+
+ route::get('/admin/rubro/nuevo', 'controladorLubro@nuevo');
+
+
+
 
