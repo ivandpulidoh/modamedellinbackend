@@ -9,14 +9,13 @@ require app_path().'/start/constants.php';
 
 class ControladorCliente extends controller
 {
-	public function nuevo()
-	{
-		$titulo = "Nuevo cliente";
-		return view("sistema.cliente-nuevo", compact("titulo"));
-	}
+ public function nuevo() {
+        $titulo = "Nuevo cliente";
+        return view("sistema.cliente-nuevo", compact("titulo"));
+    }
 
 	public function index(){
-	$tiutlo = "Listado de clientes";
+	$titulo = "Listado de clientes";
 	return view ("sistema.cliente-listar", compact("titulo"));
 	}
 
@@ -64,6 +63,40 @@ class ControladorCliente extends controller
 
         return view('sistema.cliente-nuevo', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
 
+    }
+
+
+  public function cargarGrilla(Request $request)
+    {
+        $request = $_REQUEST;
+
+        $entidad = new Cliente();
+        $aClientes = $entidad->obtenerFiltrado();
+
+        $data = array();
+        $cont = 0;
+
+        $inicio = $request['start'];
+        $registros_por_pagina = $request['length'];
+
+
+        for ($i = $inicio; $i < count($aClientes) && $cont < $registros_por_pagina; $i++) {
+            $row = array();
+        	 $row[] =  " <a href='/admin/cliente/ " .$aClientes[$i]->idcliente ." '> ".  $aClientes[$i]->nombre . "</a>" ;
+		 $row[] = $aClientes[$i]->dni;			
+            $row[] = $aClientes[$i]->correo;
+            $row[] = $aClientes[$i]->telefono;
+            $cont++;
+            $data[] = $row;
+        }
+
+        $json_data = array(
+            "draw" => intval($request['draw']),
+            "recordsTotal" => count($aClientes), //cantidad total de registros sin paginar
+            "recordsFiltered" => count($aClientes), //cantidad total de registros en la paginacion
+            "data" => $data,
+        );
+        return json_encode($json_data);
     }
 
 }
