@@ -123,8 +123,48 @@ public function insertar()
         echo "Error al insertar: " . $e->getMessage();
     }
 }
+   public function obtenerFiltrado()
+    {
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'nombre',
+            1 => 'cantidad',
+            2 => 'precio',
+            3 => 'descripcion',
+        );
+        $sql = "SELECT DISTINCT
+                 idproducto,
+		     nombre,
+		     fk_tipoproducto,
+		     cantidad,
+		     precio,
+		     descripcion,
+		     imagen 
+                FROM productos
+                WHERE 1=1
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR cantidad LIKE '%" . $request['search']['value'] . "%' ";
+		 $sql .= " OR precio LIKE '%" . $request['search']['value'] . "%' ";	
+            $sql .= " OR descripcion LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
 
 
 }
+
+
+
+
+
+
 
 ?>

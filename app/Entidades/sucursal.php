@@ -1,101 +1,140 @@
 <?php
 
-namespace App\Entidades\Entidades;
-
+namespace App\Entidades;
 
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
-
 class Sucursal extends Model
 {
- protected $table = 'sucursales';
-    public $timestamps = false;//insertar una marcas de tiempo osea fecha y hora
+    protected $table = 'sucursales';
+    public $timestamps = false;
 
-    protected $fillable = [//son los campos de la tabla idsucursal en la base de datos
+    protected $fillable = [
         'idsucursal',
-	  'nombre',
-	  'direccion',
-	  'telefono'
+        'nombre',
+        'telefono',
+        'direccion',
+        'horario'
     ];
 
-    protected $hidden = [
+    protected $hidden = [];
 
-    ];
-        public function obtenerTodos()
+    public function cargarDesdeRequest($request) {
+        // Código para cargar datos desde el request
+    }
+
+    public function obtenerTodos()
     {
         $sql = "SELECT
-                 idsucursal,
-		     nombre,
-		     direccion,
-		     telefono,
-                FROM sucursales A ORDER BY idsucursal ASC";
+                    idsucursal,
+                    nombre,
+                    telefono,
+                    direccion,
+                    horario
+                FROM sucursales
+                ORDER BY idsucursal ASC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
 
-     public function obtenerPorId($idsucursal)
+    public function obtenerPorId($idsucursal)
     {
         $sql = "SELECT
-                idsucursal,
-                nombre,
-                direccion,
-                telefono
-                FROM sucursales WHERE idsucursal = $idsucursal";
-        $lstRetorno = DB::select($sql);
+                    idsucursal,
+                    nombre,
+                    telefono,
+                    direccion,
+                    horario
+                FROM sucursales WHERE idsucursal = ?";
+        $lstRetorno = DB::select($sql, [$idsucursal]);
 
         if (count($lstRetorno) > 0) {
             $this->idsucursal = $lstRetorno[0]->idsucursal;
             $this->nombre = $lstRetorno[0]->nombre;
+            $this->telefono = $lstRetorno[0]->telefono;
             $this->direccion = $lstRetorno[0]->direccion;
-		 $this->telefono = $lstRetorno[0]->telefono;
-        
+            $this->horario = $lstRetorno[0]->horario;
             return $this;
         }
         return null;
     }
 
-        public function guardar() {
+    public function guardar()
+    {
         $sql = "UPDATE sucursales SET
-            idsucursal='$this->idicliente',
-            nombre='$this->nombre',
-            telefono=$this->telefono,
-            direccion='$this->direccion',
-            dni='$this->dni',
-            clave='$this->clave'
-            WHERE idsucursal=?";
-        $affected = DB::update($sql, [$this->idsucursal]);
-    }
-
-       public function eliminar()
-    {
-        $sql = "DELETE FROM sucursales WHERE
-            idsucursal=?";
-        $affected = DB::delete($sql, [$this->idsucursal]);
-    }
-
-     public function insertar()
-    {
-        $sql = "INSERT INTO sucursales (
-               idsucursal,
-                nombre,
-                telefono,
-                direccion,
-                dni,
-                clave
-            ) VALUES (?, ?, ?, ?, ?, ?);";
-        $result = DB::insert($sql, [
-            $this->idsucursal,
+                    nombre=?,
+                    telefono=?,
+                    direccion=?,
+                    horario=?
+                WHERE idsucursal=?";
+        $affected = DB::update($sql, [
             $this->nombre,
             $this->telefono,
             $this->direccion,
-            $this->dni,
-            $this->clave,
+            $this->horario,
+            $this->idsucursal
         ]);
-        return $this->idsucursal = DB::getPdo()->lastInsertId();
     }
 
-    
+    public function eliminar()
+    {
+        $sql = "DELETE FROM sucursales WHERE
+                    idsucursal=?";
+        $affected = DB::delete($sql, [$this->idsucursal]);
+    }
 
+    public function insertar()
+    {
+        try {
+            $sql = "INSERT INTO sucursales (
+                        nombre,
+                        telefono,
+                        direccion,
+                        horario
+                    ) VALUES (?, ?, ?, ?)";
+            $result = DB::insert($sql, [
+                $this->nombre,
+                $this->telefono,
+                $this->direccion,
+                $this->horario
+            ]);
+            return $this->idsucursal = DB::getPdo()->lastInsertId();
+        } catch (\Exception $e) {
+            // Manejar el error
+            echo "Error al insertar: " . $e->getMessage();
+        }
+    }
+
+    public function obtenerFiltrado()
+    {
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'nombre',
+            1 => 'telefono',
+            2 => 'direccion',
+            3 => 'horario',
+        );
+        $sql = "SELECT
+                    idsucursal,
+                    nombre,
+                    telefono,
+                    direccion,
+                    horario
+                FROM sucursales
+                WHERE 1=1";
+
+        // Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR telefono LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR direccion LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR horario LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . " " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
 }
-?>

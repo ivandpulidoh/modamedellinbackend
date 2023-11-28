@@ -13,7 +13,7 @@
 	<li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-	<li class="btn-item"><a title="Nuevo" href="/admin/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+	<li class="btn-item"><a title="Nuevo" href="/admin/sistema/pedido/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
 	<li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
 	</li>
 	@if($globalId > 0)
@@ -40,31 +40,32 @@ if (isset($msg)) {
 		<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
 		<input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
 		<div class="form-group col-lg-6">
-			<label>Fecha: *</label>
+			<label for="txtFecha">Fecha: *</label>
 			<input type="date" id="txtFecha" name="txtFecha" class="form-control" value="" required>
 		</div>
 
 		<div class="form-group col-lg-6">
-			<label>Sucursal: *</label>
-			<input type="id" id="lstSucursal" name="lstSucursal" class="form-control" value="" required>
+			<label for="txtSucursal">Sucursal: *</label>
+			<input type="text" id="txtSucursal" name="txtSucursal" class="form-control" value="" required>
 		</div>
 
 		<div class="form-group col-lg-6">
-			<label>Cliente: *</label>
-			<input type="id" id="lstCliente" name="lstCliente" class="form-control" value="" required>
+			<label for="txtCliente">Cliente: *</label>
+			<input type="text" id="txtCliente" name="txtCliente" class="form-control" value="" required>
 		</div>
 
 		<div class="form-group col-lg-6">
-			<label>Estado Pedido *</label>
-			<input type="text" id="txtPedido" name="txtPedido" class="form-control" value="" required>
+			<label for="txtEstadoPedido">Estado Pedido: *</label>
+			<input type="text" id="txtEstadoPedido" name="txtEstadoPedido" class="form-control" value="" required>
 		</div>
 
 		<div class="form-group col-lg-6">
-			<label>Precio *</label>
-			<input type="text" id="txtHorario" name="txtHorario" class="form-control" value="" required>
+			<label for="txtPrecio">Precio: *</label>
+			<input type="text" text="txtPrecio" name="txtPrecio" class="form-control" value="" required>
 		</div>
 	</div>
 </form>
+
 <script>
 	$("#form1").validate();
 

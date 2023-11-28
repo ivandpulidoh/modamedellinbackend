@@ -9,11 +9,11 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item active">productos</a></li>
+    <li class="breadcrumb-item active">sucursal</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/sistema/producto/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fas fa-sync-alt" aria-hidden="true" onclick='window.location.replace("/admin/productos");'><span>Recargar</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/sucursal/pedido/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Recargar" href="#" class="fas fa-sync-alt" aria-hidden="true" onclick='window.location.replace("/admin/sucursales");'><span>Recargar</span></a></li>
 </ol>
 
 @endsection
@@ -28,12 +28,11 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>cantidad</th>
-            <th>precio</th>
-		<th>descripcion</th>
-		
+		 <th>Telefono</th>
+	        <th>Direccion</th>
+		 <th>Horario</th>
         </tr>
-    </thead>
+    </thead >
 </table> 
 <script>
 	var dataTable = $('#grilla').DataTable({
@@ -44,7 +43,7 @@ if (isset($msg)) {
 	    "bSearchable": true,
         "pageLength": 25,
         "order": [[ 0, "asc" ]],
-	    "ajax": "{{ route('producto.cargarGrilla') }}"
+	    "ajax": "{{ route('sucursal.cargarGrilla') }}"
 	});
 </script>
 @endsection

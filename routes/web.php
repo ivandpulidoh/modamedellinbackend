@@ -119,7 +119,7 @@ Route::get('/admin/Productos/cargarGrilla', 'ControladorProducto@cargarGrilla')-
  route::get('/admin/pedido/nuevo', 'controladorPedido@nuevo');
  route::post('/admin/pedido/nuevo', 'controladorPedido@guardar');
  route::get('/admin/pedidos', 'controladorPedido@index');
-Route::get('/admin/Pedidos/cargarGrilla', 'ControladoPedido@cargarGrilla')->name('pedido.cargarGrilla');
+Route::get('/admin/pedido/cargarGrilla', 'ControladorPedido@cargarGrilla')->name('pedido.cargarGrilla');
 /* --------------------------------------------- */
 /* CONTROLADOR postTULACIONES                      */
 /* --------------------------------------------- */

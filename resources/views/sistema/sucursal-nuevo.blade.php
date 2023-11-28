@@ -13,7 +13,7 @@
 	<li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-	<li class="btn-item"><a title="Nuevo" href="/admin/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+	<li class="btn-item"><a title="Nuevo" href="/admin/sistema/sucursal/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
 	<li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
 	</li>
 	@if($globalId > 0)
@@ -23,7 +23,7 @@
 </ol>
 <script>
 	function fsalir() {
-		location.href = "/admin/sistema/menu";
+		location.href = "/admin/sistema/sucursal";
 	}
 </script>
 @endsection
@@ -45,19 +45,15 @@ if (isset($msg)) {
 		</div>
 
 		<div class="form-group col-lg-6">
-			<label>Direccion: *</label>
-			<input type="text" id="txtDireccion" name="txtDireccion" class="form-control" value="" required>
-		</div>
-
-		<div class="form-group col-lg-6">
 			<label>Telefono: *</label>
 			<input type="text" id="txtTelefono" name="txtTelefono" class="form-control" value="" required>
 		</div>
 
 		<div class="form-group col-lg-6">
-			<label>Link: *</label>
-			<input type="text" id="txtLink" name="txtLink" class="form-control" value="" required>
+			<label>Direccion: *</label>
+			<input type="text" id="txtDireccion" name="txtDireccion" class="form-control" value="" required>
 		</div>
+
 
 		<div class="form-group col-lg-6">
 			<label>Horario: *</label>
