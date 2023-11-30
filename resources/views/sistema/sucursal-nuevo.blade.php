@@ -41,23 +41,25 @@ if (isset($msg)) {
 		<input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
 		<div class="form-group col-lg-6">
 			<label>Nombre: *</label>
-			<input type="text" id="txtNombre" name="txtNombre" class="form-control" value="" required>
+			<input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $sucursal->nombre }}" required>
+
+
 		</div>
 
 		<div class="form-group col-lg-6">
 			<label>Telefono: *</label>
-			<input type="text" id="txtTelefono" name="txtTelefono" class="form-control" value="" required>
+			<input type="text" id="txtTelefono" name="txtTelefono" class="form-control" value="{{ $sucursal->telefono }}" required>
 		</div>
 
 		<div class="form-group col-lg-6">
 			<label>Direccion: *</label>
-			<input type="text" id="txtDireccion" name="txtDireccion" class="form-control" value="" required>
+			<input type="text" id="txtDireccion" name="txtDireccion" class="form-control" value="{{ $sucursal->direccion }}" required>
 		</div>
 
 
 		<div class="form-group col-lg-6">
 			<label>Horario: *</label>
-			<input type="text" id="txtHorario" name="txtHorario" class="form-control" value="" required>
+			<input type="text" id="txtHorario" name="txtHorario" class="form-control" value="{{ $sucursal->horario }}" required>
 		</div>
 	</div>
 </form>

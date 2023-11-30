@@ -2,28 +2,28 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-	globalId = '<?php echo isset($proveedor->idproveedor) && $proveedor->idproveedor > 0 ? $proveedor->idproveedor : 0; ?>';
-	<?php $globalId = isset($proveedor->idproveedor) ? $proveedor->idproveedor : "0"; ?>
+	globalId = '<?php echo isset($tipoproducto->idtipoproducto) && $tipoproducto->idtipoproducto > 0 ? $suctipoproductoursal->idtipoproducto : 0; ?>';
+	<?php $globalId = isset($tipoproducto->idtipoproducto) ? $tipoproducto->idtipoproducto : "0"; ?>
 </script>
 @endsection
 @section('breadcrumb')
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="/admin/home">Inicio</a></li>
-	<li class="breadcrumb-item"><a href="/admin/proveedor">proveedor</a></li>
+	<li class="breadcrumb-item"><a href="/admin/tipoproducto">Tipo producto</a></li>
 	<li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-	<li class="btn-item"><a title="Nuevo" href="/admin/sistema/proveedor/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+	<li class="btn-item"><a title="Nuevo" href="/admin/sistema/tipoproducto/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
 	<li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
 	</li>
 	@if($globalId > 0)
-	<li class="btn-item"><a title="eliminar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a></li>
+	<li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a></li>
 	@endif
 	<li class="btn-item"><a title="Salir" href="#" class="fa fa-arrow-circle-o-left" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
 	function fsalir() {
-		location.href = "/admin/proveedor";
+		location.href = "/admin/sistema/sucursal";
 	}
 </script>
 @endsection
@@ -41,31 +41,26 @@ if (isset($msg)) {
 		<input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
 		<div class="form-group col-lg-6">
 			<label>Nombre: *</label>
-			<input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $proveedor->nombre }}" required>
+			<input type="text" id="txtTipoproducto" name="txtTipoproducto" class="form-control" value="" required>
+
+
 		</div>
 
 		<div class="form-group col-lg-6">
-			<label>Domicilio: *</label>
-			<input type="text" id="txtDomicilio" name="txtDomicilio" class="form-control" value="{{ $proveedor->domicilio }}" required>
+			<label>Telefono: *</label>
+			<input type="text" id="txtTelefono" name="txtTelefono" class="form-control" value="{{ $sucursal->telefono }}" required>
 		</div>
+
 		<div class="form-group col-lg-6">
-			<label>Cuit: *</label>
-			<input type="text" id="txtCuit" name="txtCuit" class="form-control" value="{{ $proveedor->cuit }}" required>
+			<label>Direccion: *</label>
+			<input type="text" id="txtDireccion" name="txtDireccion" class="form-control" value="{{ $sucursal->direccion }}" required>
 		</div>
 
-		
+
 		<div class="form-group col-lg-6">
-		<label for="txtNombre">rubro *</label>
-<select name="txtRubro" id="txtRubro" class="form-control selectpicker">
-    @foreach($aRubros as $rubro)
-        <option value="{{ $rubro->idrubro }}" @if($rubro->idrubro == $proveedor->fk_idrubro) selected @endif>{{ $rubro->nombre }}</option>
-    @endforeach
-</select>
+			<label>Horario: *</label>
+			<input type="text" id="txtHorario" name="txtHorario" class="form-control" value="{{ $sucursal->horario }}" required>
 		</div>
-
-
-
-	
 	</div>
 </form>
 <script>
@@ -84,4 +79,4 @@ if (isset($msg)) {
 </script>
 
 
-@endsection|	
+@endsection

@@ -39,7 +39,7 @@ class Rubro extends Model
         $sql = "SELECT
                     idrubro,
                     nombre
-                FROM categorias WHERE idrubro = ?";
+                FROM rubros WHERE idrubro = ?";
         $lstRetorno = DB::select($sql, [$idrubro]);
 
         if (count($lstRetorno) > 0) {

@@ -9,11 +9,11 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item active">productos</a></li>
+    <li class="breadcrumb-item active">producto</a></li>
 </ol>
 <ol class="toolbar">
     <li class="btn-item"><a title="Nuevo" href="/admin/sistema/producto/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fas fa-sync-alt" aria-hidden="true" onclick='window.location.replace("/admin/productos");'><span>Recargar</span></a></li>
+    <li class="btn-item"><a title="Recargar" href="#" class="fas fa-sync-alt" aria-hidden="true" onclick='window.location.replace("/admin/producto");'><span>Recargar</span></a></li>
 </ol>
 
 @endsection

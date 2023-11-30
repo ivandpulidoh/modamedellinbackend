@@ -44,7 +44,13 @@ class Proveedor extends Model
 
    public function obtenerPorId($idproveedor)
 {
-    $sql = "SELECT idproveedor, nombre, domicilio, cuit, fk_idrubro FROM proveedores WHERE idproveedor = ?";
+    $sql = "SELECT
+ idproveedor, 
+nombre, 
+domicilio, 
+cuit,
+ fk_idrubro
+ FROM proveedores WHERE idproveedor = ?";
     $lstRetorno = DB::select($sql, [$idproveedor]);
 
     if (count($lstRetorno) > 0) {

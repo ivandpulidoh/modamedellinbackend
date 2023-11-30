@@ -2,80 +2,60 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
-use App\Entidades\rubro;
-use App\Entidades\tipoproducto;
-require app_path().'/start/constants.php';
+use App\Entidades\Rubro;
+require app_path().'/start/constants.php'; // Asegúrate de que este archivo existe y contiene las constantes necesarias
 
-
-class controladorRubro extends Controller
+class ControladorRubro extends Controller
 {
-	public function nuevo()
-	{
-		$titulo = "Nuevo rubro";
-		$categoria = new tipoproducto();
-		$aCategorias = $categoria->obtenerTodos();
+    public function nuevo() {
+        $titulo = "Nueva Rubro";
+	     $rubro = new Rubro();
+     return view("sistema.rubro-nuevo", compact("titulo", "rubro"));
+    }
 
-		return view("sistema.rubro-nuevo", compact("titulo", "aCategorias"));
-	}
+    public function index(){
+        $titulo = "Listado de rubro";
+        return view("sistema.rubro-listar", compact("titulo"));
+    }
 
-	public function index(){
-		$titulo = "Listado de Rubros";
-		return view ("sistema.rubro-listar", compact("titulo"));
-	}
-
-		    public function guardar(Request $request) 
-{
+    public function guardar(Request $request) {
         try {
-            //Define la entidad servicio
-            $titulo = "Modificar rubro";
-            $entidad = new rubro();
+            $titulo = "Modificar Rubro";
+            $entidad = new Rubro();
             $entidad->cargarDesdeRequest($request);
 
-            //validaciones
-            if ($entidad->nombre == "" )  {
+            if ($entidad->nombre == "" ) {
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = "Complete todos los datos";
             } else {
-                if ($_POST["id"] > 0) {
-                    //Es actualizacion
+                if ($request->input("id") > 0) {
                     $entidad->guardar();
-
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 } else {
-                    //Es nuevo
                     $entidad->insertar();
-
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 }
-              
-                $_POST["id"] = $entidad->idrubro;
-                return view('sistema.rubro-listar', compact('titulo', 'msg'));
+                return redirect()->route('sistema.rubro-listar')->with('msg', $msg);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = ERRORINSERT;
         }
 
         $id = $entidad->idrubro;
-        $rubro = new rubro();
-        $rubro->obtenerPorId($id);
+        $idrubro = new rubro();
+        $idrubro->obtenerPorId($id);
 
-        
-
-        return view('sistema.rubro-nuevo', compact('msg', 'rubro', 'titulo')) . '?id=' . $rubro->idrubro;
-
+        return view('sistema.rubro-nuevo', compact('msg', 'rubro', 'titulo'));
     }
 
-
-  public function cargarGrilla(Request $request)
-    {
+    public function cargarGrilla(Request $request) {
         $request = $_REQUEST;
 
-        $entidad = new rubro();
+        $entidad = new Rubro();
         $rubro = $entidad->obtenerFiltrado();
 
         $data = array();
@@ -84,21 +64,29 @@ class controladorRubro extends Controller
         $inicio = $request['start'];
         $registros_por_pagina = $request['length'];
 
-
         for ($i = $inicio; $i < count($rubro) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-        	 $row[] =  " <a href='/admin/rubro/ " .$rubro[$i]->idrubro ." '> ".  $rubro[$i]->nombre . "</a>" ;		
+            $row[] = "<a href='/admin/rubro/" . $rubro[$i]->idrubro . "'>" . $rubro[$i]->nombre . "</a>";
+
             $cont++;
             $data[] = $row;
         }
 
         $json_data = array(
             "draw" => intval($request['draw']),
-            "recordsTotal" => count($rubro), //cantidad total de registros sin paginar
-            "recordsFiltered" => count($rubro), //cantidad total de registros en la paginacion
+            "recordsTotal" => count($rubro),
+            "recordsFiltered" => count($rubro),
             "data" => $data,
         );
         return json_encode($json_data);
     }
 
+    public function editar($idRubro){
+        $titulo = "Edicion de Rubro";
+        $rubro = new rubro();
+        $rubro->obtenerPorId($idRubro);
+        return view("sistema.rubro-nuevo", compact("titulo", "rubro"));
+    }
 }
+
+    

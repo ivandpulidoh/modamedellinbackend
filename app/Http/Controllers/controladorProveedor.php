@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Entidades\Proveedor;
 use App\Entidades\Rubro;
-
+require app_path().'/start/constants.php';
 class ControladorProveedor extends Controller
 {
     public function nuevo()
@@ -13,14 +13,16 @@ class ControladorProveedor extends Controller
         $titulo = "Nuevo proveedor";
         $rubro = new Rubro();
         $aRubros = $rubro->obtenerTodos();
+	$proveedor = new proveedor();
 
-        return view("sistema.proveedor-nuevo", compact("titulo", "aRubros"));
+        return view("sistema.proveedor-nuevo", compact("titulo", "aRubros", "proveedor"));
     }
 
     public function index()
     {
         $titulo = "Listado de Proveedores";
-        return view("sistema.proveedor-listar", compact("titulo"));
+$proveedor = new Proveedor();
+        return view("sistema.proveedor-listar", compact("titulo", "proveedor"));
     }
 
     public function guardar(Request $request)
@@ -71,7 +73,7 @@ class ControladorProveedor extends Controller
 
         foreach ($aProveedor as $proveedor) {
             $row = array();
-            $row[] = "<a href='/admin/Proveedor/" . $proveedor->idproveedor . "'>" . $proveedor->nombre . "</a>";
+            $row[] = "<a href='/admin/proveedor/" . $proveedor->idproveedor . "'>" . $proveedor->nombre . "</a>";
             $row[] = $proveedor->domicilio;
             $row[] = $proveedor->cuit;
             $row[] = $proveedor->fk_idrubro;
@@ -92,4 +94,15 @@ class ControladorProveedor extends Controller
 
         return json_encode($json_data);
     }
+	public function editar($idProveedor){
+		$titulo = "Edicion de Proveedor";
+		$proveedor = new proveedor();
+		$proveedor->obtenerPorId($idProveedor);
+		   $rubro = new Rubro();
+		   $aRubros = $rubro->obtenerTodos();
+
+	  return view("sistema.proveedor-nuevo", compact("titulo", "aRubros", "proveedor"));
+	
+}
+
 }

@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 use App\Entidades\Cliente;
 require app_path().'/start/constants.php';
 
-
+	
+	
+		
+		
 class ControladorCliente extends controller
 {
  public function nuevo() {
-        $titulo = "Nuevo cliente";
-        return view("sistema.cliente-nuevo", compact("titulo"));
+        $titulo = "Nuevo Cliente";
+		$cliente = new Cliente();	
+        return view("sistema.cliente-nuevo", compact("titulo","cliente"));
     }
 
 	public function index(){
@@ -98,5 +102,13 @@ class ControladorCliente extends controller
         );
         return json_encode($json_data);
     }
+
+ 		public function editar($idCliente){
+		$titulo = "Edicion de cliente";
+		$cliente = new Cliente();
+		$cliente->obtenerPorId($idCliente);
+		return view("sistema.cliente-nuevo", compact("titulo","cliente"));
+
+}
 
 }

@@ -34,21 +34,21 @@ class Categoria extends Model
         return $lstRetorno;
     }
 
-    public function obtenerPorId($idcategoria)
-    {
-        $sql = "SELECT
-                    idcategoria,
-                    nombre
-                FROM categorias WHERE idcategoria = ?";
-        $lstRetorno = DB::select($sql, [$idcategoria]);
+ public function obtenerPorId($idcategoria)
+{
+    $sql = "SELECT
+                idcategoria,
+                nombre
+            FROM categorias WHERE idcategoria = ?";
+    $lstRetorno = DB::select($sql, [$idcategoria]);
 
-        if (count($lstRetorno) > 0) {
-            $this->idcategoria = $lstRetorno[0]->idcategoria;
-            $this->nombre = $lstRetorno[0]->nombre;
-            return $this;
-        }
-        return null;
+    if (count($lstRetorno) > 0) {
+        $this->idcategoria = $lstRetorno[0]->idcategoria;
+        $this->nombre = $lstRetorno[0]->nombre;
+        return $this;
     }
+    return null;
+}
 
     public function guardar()
     {

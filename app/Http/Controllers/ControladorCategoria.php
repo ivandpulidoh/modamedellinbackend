@@ -11,7 +11,8 @@ class ControladorCategoria extends controller
 {
  public function nuevo() {
         $titulo = "Nueva Categoria";
-        return view("sistema.categoria-nuevo", compact("titulo"));
+	     $categoria = new Categoria();
+        return view("sistema.categoria-nuevo", compact("titulo","categoria" ));
     }
 
 	public function index(){
@@ -95,5 +96,12 @@ class ControladorCategoria extends controller
         );
         return json_encode($json_data);
     }
+	public function editar($idCategoria){
+		  $titulo = "Edicion de producto";
+		$categoria = new Categoria();
+		$categoria->obtenerPorId($idCategoria);
+		return view("sistema.categoria-nuevo", compact("titulo","categoria"));
+
+}
 
 }

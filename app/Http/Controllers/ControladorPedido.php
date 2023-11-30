@@ -13,7 +13,8 @@ class controladorpedido extends Controller
 	public function nuevo()
 	{
 		  $titulo = "Nuevo pedido";
-		return view("sistema.pedido-nuevo", compact("titulo"));
+	     $pedido = new pedido();
+		return view("sistema.pedido-nuevo", compact("titulo","pedido"));
 	}
 
 	public function index(){
@@ -97,5 +98,13 @@ class controladorpedido extends Controller
         );
         return json_encode($json_data);
     }
+
+ 		public function editar($idPedido){
+		$titulo = "Edicion de Pedido";
+		$pedido = new pedido();
+		$pedido->obtenerPorId($idPedido);
+		return view("sistema.pedido-nuevo", compact("titulo","pedido"));
+
+}
 
 }

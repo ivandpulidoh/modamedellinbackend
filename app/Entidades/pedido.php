@@ -54,8 +54,8 @@ public function obtenerPorId($idpedido)
     $sql = "SELECT
                 idpedido,
                 fecha,
-                sucursal,
-                cliente,
+                fk_idsucursal,
+                fk_idcliente,
                 estadoPedido,
                 precio
             FROM pedidos WHERE idpedido = ?";
@@ -64,8 +64,8 @@ public function obtenerPorId($idpedido)
     if (count($lstRetorno) > 0) {
         $this->idpedido = $lstRetorno[0]->idpedido;
         $this->fecha = $lstRetorno[0]->fecha;
-        $this->sucursal = $lstRetorno[0]->sucursal;
-        $this->cliente = $lstRetorno[0]->cliente;
+        $this->fk_idsucursal = $lstRetorno[0]->fk_idsucursal;
+        $this->fk_idcliente = $lstRetorno[0]->fk_idcliente;
         $this->estadoPedido = $lstRetorno[0]->estadoPedido;
         $this->precio = $lstRetorno[0]->precio;
       

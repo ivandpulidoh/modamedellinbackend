@@ -13,7 +13,7 @@
 	<li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-	<li class="btn-item"><a title="Nuevo" href="/admin/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+	<li class="btn-item"><a title="Nuevo" href="/admin/sistema/rubro/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
 	<li class="btn-item"><a title="Guardar" href="#" class="fas fa-save" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a></li>
 	@if($globalId > 0)
 	<li class="btn-item"><a title="Eliminar" href="#" class="fas fa-trash" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a></li>
@@ -41,7 +41,7 @@ if (isset($msg)) {
 		<input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
 		<div class="form-group col-lg-6">
 			<label>Nombre: *</label>
-			<input type="text" id="txtNombre" name="txtNombre" class="form-control" value="" required>
+			<input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $rubro->nombre}}" required>
 		</div>
 
 		

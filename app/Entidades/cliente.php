@@ -77,17 +77,16 @@ class Cliente extends Model
         return null;
     }
 
-        public function guardar() {
-        $sql = "UPDATE clientes SET
-            idcliente='$this->idicliente',
-            nombre='$this->nombre',
-            telefono=$this->telefono,
-            direccion='$this->direccion',
-            dni='$this->dni',
-            clave='$this->clave'
-            WHERE idcliente=?";
-        $affected = DB::update($sql, [$this->idcliente]);
-    }
+public function guardar() {
+    $sql = "UPDATE clientes SET
+        nombre='$this->nombre',
+        telefono=$this->telefono,
+        direccion='$this->direccion',
+        dni='$this->dni',
+        clave='$this->clave'
+        WHERE idcliente=?";
+    $affected = DB::update($sql, [$this->idcliente]);
+}
 
        public function eliminar()
     {

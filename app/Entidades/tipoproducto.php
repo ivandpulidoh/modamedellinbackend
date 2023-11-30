@@ -7,36 +7,42 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Tipoproducto extends Model
+class TipoProducto extends Model
 {
- protected $table = 'tipoproductos';
+ protected $table = 'idtipoproducto';
     public $timestamps = false;//insertar una marcas de tiempo osea fecha y hora
 
-    protected $fillable = [//son los campos de la tabla tipoproductos en la base de datos
+    protected $fillable = [//son los campos de la tabla clientes en la base de datos
         'idtipoproducto',
-	  'nombre',
-
+	  'nombre'
     ];
 
     protected $hidden = [
 
     ];
+
+    public function cargarDesdeRequest($request) {
+        $this->idtipoproducto = $request->input('id') != "0" ? $request->input('id') : $this->idtipoproducto;
+        $this->nombre = $request->input('txtTipoproducto');
+  
+    }
+
         public function obtenerTodos()
     {
         $sql = "SELECT
                  idtipoproducto,
 		     nombre
-                FROM tipoproductos A ORDER BY idtipoproducto ASC";
+                FROM tipoproductos  A ORDER BY idtipoproducto ASC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
 
-     public function obtenerPorId($idtipoproducto)
+     public function obtenerPorId($idcliente)
     {
         $sql = "SELECT
                 idtipoproducto,
                 nombre
-                FROM tipoproductos WHERE idtipoproducto = $idtipoproducto";
+                FROM tipoproductos WHERE idtipoproducto = $idcliente";
         $lstRetorno = DB::select($sql);
 
         if (count($lstRetorno) > 0) {
@@ -47,13 +53,12 @@ class Tipoproducto extends Model
         return null;
     }
 
-        public function guardar() {
-        $sql = "UPDATE tipoproductos SET
-            idtipoproducto='$this->idicliente',
-            nombre='$this->nombre',
-            WHERE idtipoproducto=?";
-        $affected = DB::update($sql, [$this->idtipoproducto]);
-    }
+public function guardar() {
+    $sql = "UPDATE tipoproductos SET
+        nombre='$this->nombre'
+        WHERE idtipoproducto=?";
+    $affected = DB::update($sql, [$this->idtipoproducto]);
+}
 
        public function eliminar()
     {
@@ -62,22 +67,53 @@ class Tipoproducto extends Model
         $affected = DB::delete($sql, [$this->idtipoproducto]);
     }
 
-     public function insertar()
-    {
+public function insertar()
+{
+    try {
         $sql = "INSERT INTO tipoproductos (
-               idtipoproducto,
-                nombre,
-           
-            ) VALUES (?, ?);";
+               nombre
+            ) VALUES (?);";
         $result = DB::insert($sql, [
-            $this->idtipoproducto,
+
             $this->nombre,
-            
+   
         ]);
-        return $this->idtipoproducto = DB::getPdo()->lastInsertId();
+        return $this->idcliente = DB::getPdo()->lastInsertId();
+    } catch (\Exception $e) {
+        // Manejar el error
+        echo "Error al insertar: " . $e->getMessage();
+    }
+}
+
+   public function obtenerFiltrado()
+    {
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'nombre'
+,
+        );
+        $sql = "SELECT DISTINCT
+                 idtipoproducto,
+		     nombre,
+	
+                FROM tipoproductos
+                WHERE 1=1
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( nombre LIKE '%" . $request['search']['value'] . "%' ";
+           
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
     }
 
-    
 
 }
+
+
 ?>

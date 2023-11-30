@@ -26,41 +26,41 @@ class Producto extends Model
 
     ];
 
-    public function cargarDesdeRequest($request) {
-        $this->idproducto = $request->input('id') != "0" ? $request->input('id') : $this->idproducto;
-        $this->nombre = $request->input('txtNombre');
-        $this->fk_tipoproducto = $request->input('txtTipoProducto');
-        $this->cantidad = $request->input('lstCantidad');
-        $this->precio = $request->input('txtPrecio');
-        $this->descripcion = $request->input('txtDescripcion');
-        $this->imagen = $request->input('txtArchivo');
-    }
+ public function cargarDesdeRequest($request) {
+    $this->idproducto = $request->input('id');
+    $this->nombre = $request->input('txtNombre');
+    $this->fk_tipoproducto = $request->input('txtTipoProducto');
+    $this->cantidad = $request->input('txtCantidad');
+    $this->precio = $request->input('txtPrecio');
+    $this->descripcion = $request->input('txtDescripcion');
+    $this->imagen = $request->input('txtImagen');
+}
 
-        public function obtenerTodos()
-    {
-        $sql = "SELECT
-		'idproducto',
-		'nombre',
-		'fk_tipoproducto',
-		'cantidad',
-		'precio',
-		'descripcion',
-		'imagen'
-                FROM productos A ORDER BY idproducto ASC";
-        $lstRetorno = DB::select($sql);
-        return $lstRetorno;
-    }
+public function obtenerTodos()
+{
+    $sql = "SELECT
+                idproducto,
+                nombre,
+                fk_tipoproducto,
+                cantidad,
+                precio,
+                descripcion,
+                imagen
+            FROM productos A ORDER BY idproducto ASC";
+    $lstRetorno = DB::select($sql);
+    return $lstRetorno;
+}
 
      public function obtenerPorId($idproducto)
     {
-        $sql = "SELECT
-		'idproducto',
-		'nombre',
-		'fk_tipoproducto',
-		'cantidad',
-		'precio',
-		'descripcion',
-		'imagen'
+  $sql = "SELECT
+		idproducto,
+		nombre,
+		fk_tipoproducto,
+		cantidad,
+		precio,
+		descripcion,
+		imagen
                 FROM productos WHERE idproducto = $idproducto";
         $lstRetorno = DB::select($sql);
 
@@ -77,18 +77,17 @@ class Producto extends Model
         return null;
     }
 
-        public function guardar() {
-        $sql = "UPDATE productos SET
-            idproducto='$this->idproducto',
-            nombre='$this->nombre',
-            fk_tipoproducto=$this->fk_tipoproducto,
-            cantidad='$this->cantidad',
-            precio='$this->precio',
-            descripcion='$this->descripcion',
-  		  imagen='$this->imagen'
-            WHERE idproducto=?";
-        $affected = DB::update($sql, [$this->idproducto]);
-    }
+ public function guardar() {
+    $sql = "UPDATE productos SET
+        nombre='$this->nombre,
+        fk_idtipoproducto=$this->fk_idtipoproducto,
+        cantidad='$this->cantidad,
+        precio='$this->precio,
+        descripcion='$this->descripcion,
+	imagen='$this->imagen
+        WHERE idproducto=?";
+    $affected = DB::update($sql, [$this->idproducto]);
+}
 
        public function eliminar()
     {
@@ -97,19 +96,19 @@ class Producto extends Model
         $affected = DB::delete($sql, [$this->idproducto]);
     }
 
+
 public function insertar()
 {
     try {
         $sql = "INSERT INTO productos (
-		nombre,
-		fk_tipoproducto,
-		cantidad,
-		precio,
-		descripcion,
-		imagen
-		) VALUES (?, ?, ?, ?, ?, ?);";
+            nombre,
+            fk_tipoproducto,
+            cantidad,
+            precio,
+            descripcion,
+            imagen
+        ) VALUES (?, ?, ?, ?, ?, ?)";
         $result = DB::insert($sql, [
-
             $this->nombre,
             $this->fk_tipoproducto,
             $this->cantidad,
@@ -128,9 +127,10 @@ public function insertar()
         $request = $_REQUEST;
         $columns = array(
             0 => 'nombre',
-            1 => 'cantidad',
-            2 => 'precio',
-            3 => 'descripcion',
+            1 => 'fk_tipoproducto',
+            2 => 'cantidad',
+            3 => 'precio',
+		4 => 'descripcion'
         );
         $sql = "SELECT DISTINCT
                  idproducto,
@@ -150,6 +150,7 @@ public function insertar()
             $sql .= " OR cantidad LIKE '%" . $request['search']['value'] . "%' ";
 		 $sql .= " OR precio LIKE '%" . $request['search']['value'] . "%' ";	
             $sql .= " OR descripcion LIKE '%" . $request['search']['value'] . "%' )";
+		
         }
         $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
 
@@ -160,11 +161,6 @@ public function insertar()
 
 
 }
-
-
-
-
-
 
 
 ?>
