@@ -32,7 +32,15 @@
 
 <?php
 if (isset($msg)) {
-	echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
+    echo '<div id = "msg"></div>';
+    echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
+}
+?>
+<div class="panel-body">
+        <div id = "msg"></div>
+        <?php
+if (isset($msg)) {
+    echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
 <form id="form1" method="POST">

@@ -4,44 +4,43 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Entidades\Producto;
-use App\Entidades\Tipoproducto;
+use App\Entidades\TipoProducto;
 require app_path().'/start/constants.php';
-
 class ControladorProducto extends Controller
 {
-  public function nuevo()
+    public function nuevo()
     {
         $titulo = "Nuevo Producto";
-        $categoria = new Tipoproducto();
-	$producto = new Producto();
-$categoria = new Tipoproducto();
+        $categoria = new TipoProducto();
         $aCategorias = $categoria->obtenerTodos();
+	$producto = new Producto();
 
-        return view('sistema.producto-nuevo', compact( 'producto', 'titulo', 'aCategorias'));
+        return view("sistema.producto-nuevo", compact("titulo", "aCategorias", "producto"));
     }
 
     public function index()
     {
-        $titulo = "Listado de producto";
-        $producto = new Producto();
+        $titulo = "Listado de Producto";
+	$producto = new Producto();
+	
         return view("sistema.producto-listar", compact("titulo", "producto"));
     }
 
     public function guardar(Request $request)
     {
         try {
-			//Define la entidad servicio
             $titulo = "Modificar Producto";
             $entidad = new Producto();
+		$categoria = new TipoProducto();
+		 $aCategorias = $categoria->obtenerTodos();
             $entidad->cargarDesdeRequest($request);
 
-            if ($entidad->nombre == "" || $entidad->fk_tipoproducto == "" ||  $entidad->cantidad == ""  ||  $entidad->precio == "" ||  $entidad->descripcion == ""||  $entidad->imagen == "") {
+            if ($entidad->nombre == "") {
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = "Complete todos los datos";
             } else {
                 if ($request->input("id") > 0) {
                     $entidad->guardar();
-
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 } else {
@@ -50,7 +49,7 @@ $categoria = new Tipoproducto();
                     $msg["MSG"] = OKINSERT;
                 }
 
-                return view('sistema.producto-listar', compact('titulo', 'msg'));
+                return view('sistema.producto-listar', compact('titulo', 'msg', 'aCategorias'));
             }
         } catch (\Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
@@ -60,16 +59,15 @@ $categoria = new Tipoproducto();
         $id = $entidad->idproducto;
         $producto = new Producto();
         $producto->obtenerPorId($id);
-	$categoria = new Tipoproducto();
+	  $categoria = new TipoProducto();
         $aCategorias = $categoria->obtenerTodos();
-
-        return view('sistema.producto-nuevo', compact('msg', 'producto', 'titulo', 'aCategorias'));
+        return view('sistema.producto-nuevo', compact('msg', 'producto', 'titulo','aCategorias'));
     }
 
     public function cargarGrilla(Request $request)
     {
         $entidad = new Producto();
-        $aCategorias = $entidad->obtenerFiltrado();
+        $aProducto = $entidad->obtenerFiltrado();
 
         $data = array();
         $cont = 0;
@@ -77,13 +75,12 @@ $categoria = new Tipoproducto();
         $inicio = $request->input('start');
         $registros_por_pagina = $request->input('length');
 
-        foreach ($aCategorias as $producto) {
+        foreach ($aProducto as $producto) {
             $row = array();
             $row[] = "<a href='/admin/producto/" . $producto->idproducto . "'>" . $producto->nombre . "</a>";
-            $row[] = $producto->fk_tipoproducto;
+            $row[] = $producto->cantidad;
             $row[] = $producto->precio;
-            $row[] = $producto->descripcion;
-           
+		$row[] = $producto->descripcion;
             $data[] = $row;
 
             $cont++;
@@ -94,22 +91,22 @@ $categoria = new Tipoproducto();
 
         $json_data = array(
             "draw" => intval($request->input('draw')),
-            "recordsTotal" => count($aCategorias),
-            "recordsFiltered" => count($aCategorias),
+            "recordsTotal" => count($aProducto),
+            "recordsFiltered" => count($aProducto),
             "data" => $data,
         );
 
         return json_encode($json_data);
     }
+	public function editar($idProducto){
+		$titulo = "Edicion de Producto";
+		$producto = new producto();
+		$producto->obtenerPorId($idProducto);
+		   $categoria = new TipoProducto();
+		   $aCategorias = $categoria->obtenerTodos();
 
-    public function editar($idProducto){
+	  return view("sistema.producto-nuevo", compact("titulo", "aCategorias", "producto"));
+	
+}
 
-     $titulo = "Edicion de Producto";
-        $producto = new Producto();
-        $producto->obtenerPorId($idProducto);
-        $categoria = new Tipoproducto();
-        $aCategorias = $categoria->obtenerTodos();
-
-        return view("sistema.producto-nuevo", compact("titulo","aCategorias","producto"));
-    }
 }

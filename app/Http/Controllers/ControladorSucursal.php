@@ -38,7 +38,8 @@ class ControladorSucursal extends Controller
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 }
-                return redirect()->route('sistema.sucursal-listar')->with('msg', $msg);
+                    $titulo = "Listado de Sucursales";
+        return view("sistema.sucursal-listar", compact("titulo"));
             }
         } catch (\Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;

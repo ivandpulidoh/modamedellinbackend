@@ -46,6 +46,7 @@ if (isset($msg)) {
 <div class="form-group col-lg-6">
     <label for="txtTipoProducto">Tipo producto *</label>
     <select name="txtTipoProducto" id="txtTipoProducto" class="form-control">
+	 <option value="{{ $aCategorias[0]->nombre }}" disabled selected>Seleccionar</option>
         @foreach($aCategorias as $categoria)
             <option value="{{ $categoria->idtipoproducto }}">{{ $categoria->nombre }}</option>
             <!-- ^^^^^^^^^^^^^^^^^ Cambia $categoria->id por la propiedad que representa el ID del tipo de producto -->

@@ -2,36 +2,47 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Entidades\pedido;
+use App\Entidades\Sucursal;
+use App\Entidades\Cliente;
 require app_path().'/start/constants.php';
 
 
-class controladorpedido extends Controller
+class ControladorPedido extends Controller
 {
 	public function nuevo()
 	{
-		  $titulo = "Nuevo pedido";
-	     $pedido = new pedido();
-		return view("sistema.pedido-nuevo", compact("titulo","pedido"));
+	$titulo = "Nuevo pedido";
+	$pedido = new Pedido(); // Asumiendo que 'Pedido' es la clase de los pedidos
+	$sucursal = new Sucursal();
+	$aCategorias = $sucursal->obtenerTodos();
+	$cliente = new Cliente();
+	$aClientes = $cliente->obtenerTodos();
+	return view("sistema.pedido-nuevo", compact("titulo", "pedido", "aCategorias", "aClientes"));
 	}
 
 	public function index(){
 		$titulo = "Listado de pedidos";
-		return view ("sistema.pedido-listar", compact("titulo"));
+		   $pedido = new pedido();
+		return view ("sistema.pedido-listar", compact("titulo","pedido"));
 	}
 
-			    public function guardar(Request $request) 
+	    public function guardar(Request $request) 
 {
-        try {
+        try 
+{
             //Define la entidad servicio
             $titulo = "Modificar pedido";
             $entidad = new pedido;
+		$categoria = new Sucursal();
+ 	     $aCategorias = $categoria->obtenerTodos();
+		$cliente = new Sucursal();
+		$aClientes = $cliente->obtenerTodos();
             $entidad->cargarDesdeRequest($request);
 
             //validaciones
-            if ($entidad->fecha == "" ||  $entidad->sucursal == ""|| $entidad->cliente == ""|| $entidad->estadoPedido == ""  )  {
+            if ($entidad->fecha == ""   )  {
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = "Complete todos los datos";
             } else {
@@ -50,7 +61,12 @@ class controladorpedido extends Controller
                 }
               
                 $_POST["id"] = $entidad->idpedido;
-                return view('sistema.pedido-listar', compact('titulo', 'msg'));
+			$pedido = new pedido();
+			$categoria = new Sucursal();
+ 	    		 $aCategorias = $categoria->obtenerTodos();
+			$cliente = new Cliente();
+	$aClientes = $cliente->obtenerTodos();
+                return view('sistema.pedido-listar', compact('titulo', 'msg','aCategorias','aClientes'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
@@ -60,10 +76,13 @@ class controladorpedido extends Controller
         $id = $entidad->idpedido;
         $pedido = new pedido();
         $pedido->obtenerPorId($id);
-
+	$categoria = new Sucursal();
+	$aCategorias = $categoria->obtenerTodos();
+	$cliente = new Cliente();
+	$aClientes = $cliente->obtenerTodos();
         
 
-        return view('sistema.pedido-nuevo', compact('msg', 'pedido', 'titulo')) . '?id=' . $pedido->idpedido;
+        return view('sistema.pedido-nuevo', compact('msg', 'pedido', 'titulo','aClientes','aCategorias')) . '?id=' . $pedido->idpedido;
 
     }
   public function cargarGrilla(Request $request)
@@ -83,8 +102,8 @@ class controladorpedido extends Controller
         for ($i = $inicio; $i < count($apedido) && $cont < $registros_por_pagina; $i++) {
             $row = array();
         	 $row[] =  " <a href='/admin/pedido/ " .$apedido[$i]->idpedido ." '> ".  $apedido[$i]->fecha . "</a>" ;		
-            $row[] = $apedido[$i]->nombre_sucursal;
-		$row[] = $apedido[$i]->nombre_cliente;
+            $row[] = $apedido[$i]->fk_idsucursal;
+		$row[] = $apedido[$i]->fk_idcliente;
 		$row[] = $apedido[$i]->estadoPedido;
             $cont++;
             $data[] = $row;
@@ -103,8 +122,16 @@ class controladorpedido extends Controller
 		$titulo = "Edicion de Pedido";
 		$pedido = new pedido();
 		$pedido->obtenerPorId($idPedido);
-		return view("sistema.pedido-nuevo", compact("titulo","pedido"));
+		$categoria = new Sucursal();
+		$aCategorias = $categoria->obtenerTodos();
+		$cliente = new Cliente();
+		$aClientes = $cliente->obtenerTodos();
+		return view("sistema.pedido-nuevo", compact("titulo","pedido","aCategorias","aClientes"));
 
 }
 
+	
+
 }
+
+

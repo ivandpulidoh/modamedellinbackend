@@ -44,15 +44,30 @@ if (isset($msg)) {
 			<input type="date" id="txtFecha" name="txtFecha" class="form-control" value="{{ $pedido->fecha }}" required>
 		</div>
 
-		<div class="form-group col-lg-6">
-			<label for="txtSucursal">Sucursal: *</label>
-			<input type="text" id="txtSucursal" name="txtSucursal" class="form-control" value="{{ $pedido->fk_idsucursal }}" required>
-		</div>
+		
+				<div class="form-group col-lg-6">
+			<label for="txtCliente">Cliente</label>
+			<select name="txtCliente" id="txtCliente" class="form-control">
+				<option value="{{ $aClientes[0]->nombre }}" disabled selected>Seleccionar</option>
+				@foreach($aClientes as $cliente)
+					<option value="{{ $cliente->idcliente }}">{{ $cliente->nombre }}</option>
+				@endforeach
+			</select>
+			</div>
 
-		<div class="form-group col-lg-6">
-			<label for="txtCliente">Cliente: *</label>
-			<input type="text" id="txtCliente" name="txtCliente" class="form-control" value="{{ $pedido->fk_idcliente }}" required>
-		</div>
+	<div class="form-group col-lg-6">
+    <label for="txtSucursal">Sucursal *</label>
+    <select name="txtSucursal" id="txtSucursal" class="form-control">
+        <option value="{{ $aCategorias[0]->nombre }}" disabled selected>Seleccionar</option>
+        @foreach($aCategorias as $categoria)
+            @if (!$loop->first)
+                <option value="{{ $categoria->idsucursal }}">{{ $categoria->nombre }}</option>
+            @endif
+        @endforeach
+    </select>
+</div>
+
+
 
 		<div class="form-group col-lg-6">
 			<label for="txtEstadoPedido">Estado Pedido: *</label>

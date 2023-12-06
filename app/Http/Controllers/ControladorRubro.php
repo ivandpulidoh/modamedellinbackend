@@ -46,8 +46,8 @@ class ControladorRubro extends Controller
         }
 
         $id = $entidad->idrubro;
-        $idrubro = new rubro();
-        $idrubro->obtenerPorId($id);
+        $rubro = new rubro();
+        $rubro->obtenerPorId($id);
 
         return view('sistema.rubro-nuevo', compact('msg', 'rubro', 'titulo'));
     }

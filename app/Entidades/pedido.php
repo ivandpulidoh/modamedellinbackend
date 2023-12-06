@@ -15,8 +15,8 @@ class Pedido extends Model
     protected $fillable = [//son los campos de la tabla pedidos en la base de datos
         'idpedido',
 	  'fecha',
-	  'sucursal',
-	  'cliente',
+	  'fk_idsucursal',
+	  'fk_idcliente',
 	  'estadoPedido',
 	  'precio '
     ];
@@ -28,8 +28,8 @@ class Pedido extends Model
     public function cargarDesdeRequest($request) {
         $this->idpedido = $request->input('id') != "0" ? $request->input('id') : $this->idpedido;
         $this->fecha = $request->input('txtFecha');
-        $this->sucursal = $request->input('txtSucursal');
-        $this->cliente = $request->input('txtCliente');
+        $this->fk_idsucursal = $request->input('txtSucursal');
+        $this->fk_idcliente = $request->input('txtCliente');
         $this->estadoPedido = $request->input('txtEstadoPedido');
         $this->precio = $request->input('txtPrecio');
       
@@ -38,13 +38,13 @@ class Pedido extends Model
         public function obtenerTodos()
     {
         $sql = "SELECT
-                        'idpedido',
-				'fecha',
-				'sucursal',
-				'cliente',
-				'estadoPedido',
-				'precio'
-                FROM pedidos A ORDER BY idpedido ASC";
+                idpedido,
+                fecha,
+                fk_idsucursal,
+                fk_idcliente,
+                estadoPedido,
+                precio
+            FROM pedidos A ORDER BY idpedido ASC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -73,20 +73,25 @@ public function obtenerPorId($idpedido)
     }
     return null;
 }
+public function guardar()
+{
+    $sql = "UPDATE pedidos SET
+                fecha = ?,
+                fk_idsucursal = ?,
+                fk_idcliente = ?,
+                estadoPedido = ?,
+                precio = ?
+            WHERE idpedido = ?";
 
-        public function guardar()
- {
-        $sql = "UPDATE pedidos SET
-            idpedido='$this->idpedido',
-            fecha='$this->fecha',
-            sucursal=$this->sucursal,
-            cliente='$this->cliente',
-            estadoPedido='$this->estadoPedido'
-		precio='$this->precio'
-            WHERE idpedido=?";
-        $affected = DB::update($sql, [$this->idpedido]);
-    }
-
+    $affected = DB::update($sql, [
+        $this->fecha,
+        $this->fk_idsucursal,
+        $this->fk_idcliente,
+        $this->estadoPedido,
+        $this->precio,
+        $this->idpedido
+    ]);
+}
        public function eliminar()
     {
         $sql = "DELETE FROM pedidos WHERE
@@ -97,41 +102,48 @@ public function insertar()
 {
     try {
         $sql = "INSERT INTO pedidos (
-				fecha,
-				sucursal,
-				cliente,
-				estadoPedido,
-				precio
-            ) VALUES (?, ?, ?, ?, ?);";
+                    fecha,
+                    fk_idsucursal, 
+                    fk_idcliente, 
+                    estadoPedido,
+                    precio
+                ) VALUES (?, ?, ?, ?, ?);";
+
+        // Verifica si fk_idsucursal es nulo y, si lo es, asigna un valor por defecto
+        $fkIdsucursal = $this->fk_idsucursal ?? 0;
+
         $result = DB::insert($sql, [
             $this->fecha,
-            $this->sucursal,
-            $this->cliente,
+            $this->fk_idsucursal,
+            $this->fk_idcliente,
             $this->estadoPedido,
             $this->precio
         ]);
+
         return $this->idpedido = DB::getPdo()->lastInsertId();
     } catch (\Exception $e) {
         // Manejar el error
-        echo "Error al insertar: " . $e->getMessage();
+        echo "Error al insertar el pedido: " . $e->getMessage();
     }
 }
+
+
 
    public function obtenerFiltrado()
     {
         $request = $_REQUEST;
         $columns = array(
             0 => 'P.fecha',
-            1 => 'S.nombre',
-            2 => 'C.nombre',
+            1 => 'fk_idsucursal',
+            2 => 'fk_idcliente',
             3 => 'P.estadoPedido',
         );
         $sql = "SELECT DISTINCT
                     P.idpedido,
                     P.fecha,
                     P.precio,
-                    S.nombre AS nombre_sucursal,
-                    C.nombre AS nombre_cliente,
+                    fk_idsucursal,
+                    fk_idcliente,
                     estadoPedido
                 FROM pedidos P
                 JOIN sucursales S 

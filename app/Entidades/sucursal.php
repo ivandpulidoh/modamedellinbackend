@@ -21,7 +21,13 @@ class Sucursal extends Model
     protected $hidden = [];
 
     public function cargarDesdeRequest($request) {
-        // Código para cargar datos desde el request
+        $this->idsucursal = $request->input('id') != "0" ? $request->input('id') : $this->idsucursal;
+        $this->nombre = $request->input('txtNombre');
+        $this->telefono = $request->input('txtTelefono');
+        $this->direccion = $request->input('txtDireccion');
+        $this->horario = $request->input('txtHorario');
+       
+      
     }
 
     public function obtenerTodos()
