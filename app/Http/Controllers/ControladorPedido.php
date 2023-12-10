@@ -130,6 +130,25 @@ class ControladorPedido extends Controller
 
 }
 
+	public function eliminar(Request $request){
+		$idPedido  =  $request->input("id");
+	      $pedido = new Pedido();
+		// si el cliente tiene un pedido asociado no se debo poder eliminar
+		if($pedido->existePedidosPorPedido($idPedido)){	
+		$resultado["err"] = EXIT_FAILURE;	
+		$resultado["mensaje"] = "No se puede eliminar un cliente con pedidos asociados";
+		}else {   
+	//sin o si
+	     $pedido = new pedido();
+		$pedido->idpedido =  $idPedido;
+		$pedido->eliminar();
+		$resultado["err"] = EXIT_SUCCESS;
+		$resultado["mensaje"] = "Registro eliminado exitosamente";
+			}
+		return json_encode($resultado);
+
+		}
+
 	
 
 }

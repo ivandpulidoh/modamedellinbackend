@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Entidades\Categoria;
+use App\Entidades\Producto;
+use App\Entidades\Sistema\Usuario;
+use App\Entidades\TipoProducto;
+
 require app_path().'/start/constants.php';
 
 
@@ -103,5 +107,29 @@ class ControladorCategoria extends controller
 		return view("sistema.categoria-nuevo", compact("titulo","categoria"));
 
 }
+public function eliminar(Request $request)
+{
+    if (!Usuario::autenticado()) {
+        if (!Patente::autorizacion("CATEGORIAELIMINAR")) {
+            $resultado["err"] = EXIT_FAILURE;
+            $resultado["mensaje"] = "No tiene permiso para ejecutar la operacion";
+        } else {
+            $idCategoria = $request->input("id");
+            $producto = new Producto();
 
+            // Si la categoria tiene un producto asociado no se tiene que poder eliminar
+            if ($producto->existeProductoCategoria($idCategoria)) {
+                $resultado["err"] = EXIT_FAILURE;
+                $resultado["mensaje"] = "No se puede eliminar una categoria con un producto asociado";
+            } else {
+                //sino si
+                $categoria = new TipoProducto();
+                $categoria->idtipoproducto = $idCategoria;
+                $categoria->eliminar();
+                $resultado["err"] = EXIT_SUCCESS;
+                $resultado["mensaje"] = "Categoría eliminada correctamente";
+            }
+            return json_encode($resultado);
+        }
+    }
 }

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Entidades\Pedido;
 use Illuminate\Http\Request;
 use App\Entidades\Proveedor;
 use App\Entidades\Rubro;
+use App\Entidades\Sistema\Patente;
+use App\Entidades\Sistema\Usuario;
+
 require app_path().'/start/constants.php';
 class ControladorProveedor extends Controller
 {
@@ -105,4 +109,30 @@ $proveedor = new Proveedor();
 	
 }
 
-}
+		public function eliminar(Request $request){
+		if(!Usuario::autenticado()== true){
+		if(!Patente::autorizacicon("PROVEDORBAJA")){
+			$resultado["err"] = EXIT_FAILURE;
+			$resultado["mensaje"] = "No tiene permiso para ejecutar la operacion";
+		} else{
+			$proveedor = new Proveedor();
+			$proveedor->idproveedor = $request->input("id");
+			$proveedor->eliminar();
+			$resultado["err"] =EXIT_SUCCESS;
+			$resultado["mensaje"] = "Registro eliminado exitosamente";
+		}
+		
+	}   else{
+			$resultado["err"] = EXIT_FAILURE;
+			$resultado["mensaje"]= "Usuario no autenticado";
+		}
+		return json_encode($resultado);
+
+
+{			
+
+	}
+		}
+
+
+

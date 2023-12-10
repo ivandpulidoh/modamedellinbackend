@@ -104,9 +104,10 @@ Route::post('/admin/patente/nuevo/{id}', 'ControladorPatente@guardar');
  route::post('/admin/cliente/nuevo', 'controladorCliente@guardar');
  route::get('/admin/clientes', 'controladorCliente@index');
   Route::get('/admin/clientes/cargarGrilla', 'ControladorCliente@cargarGrilla')->name('cliente.cargarGrilla');
- route::get('/admin/cliente/{idCliente}', 'controladorCliente@editar');
+ route::get('/admin/cliente/eliminar', 'controladorCliente@eliminar');
+route::get('/admin/cliente/{idCliente}', 'controladorCliente@editar');
 route::post('/admin/cliente/{idCliente}', 'controladorCliente@guardar');
-route::get('/admin/cliente/eliminar', 'controladorCliente@eliminar');
+
 /* --------------------------------------------- */
 /* CONTROLADOR PRODUCTOS                      */
 /* --------------------------------------------- */
@@ -115,6 +116,7 @@ route::get('/admin/cliente/eliminar', 'controladorCliente@eliminar');
  route::post('/admin/producto/nuevo', 'ControladorProducto@guardar');
  route::get('/admin/producto', 'ControladorProducto@index');
 Route::get('/admin/producto/cargarGrilla', 'ControladorProducto@cargarGrilla')->name('producto.cargarGrilla');
+ route::get('/admin/producto/eliminar', 'controladorProducto@eliminar');	
  route::get('/admin/producto/{idProducto}', 'ControladorProducto@editar');
 route::post('/admin/producto/{idProducto}', 'ControladorProducto@guardar');
 /* --------------------------------------------- */
@@ -125,6 +127,7 @@ route::post('/admin/producto/{idProducto}', 'ControladorProducto@guardar');
  route::post('/admin/pedido/nuevo', 'controladorPedido@guardar');
  route::get('/admin/pedidos', 'controladorPedido@index');
 Route::get('/admin/pedido/cargarGrilla', 'ControladorPedido@cargarGrilla')->name('pedido.cargarGrilla');
+ route::get('/admin/pedido/eliminar', 'controladorPedido@eliminar');
   route::get('/admin/pedido/{idPedido}', 'ControladorPedido@editar');
 route::post('/admin/pedido/{idPedido}', 'ControladorPedido@guardar');
 /* --------------------------------------------- */
@@ -135,6 +138,7 @@ route::post('/admin/pedido/{idPedido}', 'ControladorPedido@guardar');
  route::post('/admin/postulacion/nuevo', 'controladorPostulacion@guardar');
  route::get('/admin/postulaciones', 'controladorPostulacion@index');
 Route::get('/admin/Postulaciones/cargarGrilla', 'ControladorPostulacion@cargarGrilla')->name('postulacion.cargarGrilla');
+ route::get('/admin/postulacion/eliminar', 'controladorPostulacion@eliminar');
  route::get('/admin/postulacion/{idPostulacion}', 'ControladorPostulacion@editar');
 route::post('/admin/postulacion/{idPostulacion}', 'controladorPostulacion@guardar');
 /* --------------------------------------------- */
@@ -145,6 +149,7 @@ route::post('/admin/postulacion/{idPostulacion}', 'controladorPostulacion@guarda
  route::post('/admin/sucursal/nuevo', 'controladorSucursal@guardar');
  route::get('/admin/sucursales', 'controladorSucursal@index');
 Route::get('/admin/Sucursales/cargarGrilla', 'ControladorSucursal@cargarGrilla')->name('sucursal.cargarGrilla');
+ route::get('/admin/sucursal/eliminar', 'controladorSucursal@eliminar');
  route::get('/admin/sucursal/{idSucursal}', 'ControladorSucursal@editar');
 route::post('/admin/sucursal/{idSucursal}', 'ControladorSucursal@guardar');
 
@@ -156,6 +161,7 @@ route::post('/admin/sucursal/{idSucursal}', 'ControladorSucursal@guardar');
 route::post('/admin/categoria/nuevo', 'controladorCategoria@guardar');
 route::get('/admin/categorias', 'controladorCategoria@index');
 Route::get('/admin/Categorias/cargarGrilla', 'ControladorCategoria@cargarGrilla')->name('categoria.cargarGrilla');
+ route::get('/admin/categoria/eliminar', 'controladorCategoria@eliminar');
   route::get('/admin/categoria/{idCategoria}', 'controladorCategoria@editar');
 route::post('/admin/categoria/{idCategoria}', 'controladorCategoria@guardar');
 /* --------------------------------------------- */
@@ -166,6 +172,7 @@ route::post('/admin/categoria/{idCategoria}', 'controladorCategoria@guardar');
  route::post('/admin/proveedor/nuevo', 'controladorProveedor@guardar');
 route::get('/admin/proveedor', 'controladorProveedor@index');
 Route::get('/admin/proveedor/cargarGrilla', 'controladorProveedor@cargarGrilla')->name('proveedor.cargarGrilla');
+ route::get('/admin/proveedor/eliminar', 'controladorProveedor@eliminar');
   route::get('/admin/proveedor/{idProveedor}', 'controladorProveedor@editar');
 route::post('/admin/proveedor/{idProveedor}', 'controladorProveedor@guardar');
 
@@ -177,6 +184,7 @@ route::post('/admin/proveedor/{idProveedor}', 'controladorProveedor@guardar');
  route::post('/admin/rubro/nuevo', 'controladorRubro@guardar');
 route::get('/admin/rubro', 'controladoRrubro@index');
 Route::get('/admin/rubro/cargarGrilla', 'ControladorRubro@cargarGrilla')->name('rubro.cargarGrilla');
+ route::get('/admin/rubro/eliminar', 'controladoRubro@eliminar');
   route::get('/admin/rubro/{idRubro}', 'controladorRubro@editar');
 route::post('/admin/rubro/{idCliente}', 'controladorRubro@guardar');
 

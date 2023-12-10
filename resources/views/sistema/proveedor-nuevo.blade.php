@@ -32,9 +32,11 @@
 
 <?php
 if (isset($msg)) {
+	echo '<div id =  "msg"></div>';
 	echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
+<div id =  "msg"></div>
 <form id="form1" method="POST">
 	<div class="row">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
@@ -56,11 +58,12 @@ if (isset($msg)) {
 		
 		<div class="form-group col-lg-6">
 		<label for="txtNombre">rubro *</label>
-<select name="txtRubro" id="txtRubro" class="form-control selectpicker">
-    @foreach($aRubros as $rubro)
-        <option value="{{ $rubro->idrubro }}" @if($rubro->idrubro == $proveedor->fk_idrubro) selected @endif>{{ $rubro->nombre }}</option>
-    @endforeach
-</select>
+			<select name="txtRubro" id="txtRubro" class="form-control selectpicker">
+			<option value="{{ $aRubros[0]->nombre }}" disabled selected>Seleccionar</option>
+			@foreach($aRubros as $rubro)
+				<option value="{{ $rubro->idrubro }}" @if($rubro->idrubro == $proveedor->fk_idrubro) selected @endif>{{ $rubro->nombre }}</option>
+			@endforeach
+			</select>
 		</div>
 
 
@@ -81,6 +84,29 @@ if (isset($msg)) {
 			return false;
 		}
 	}
+
+
+function eliminar() {
+    $.ajax({
+        type: "GET",
+        url: "{{ asset('admin/proveedor/eliminar') }}",
+        data: { id: globalId },
+        async: true,
+        dataType: "json",
+        success: function (data) {
+            if (data.err = 0) {
+                msgShow(data.mensaje, "success");
+                $("#btnEnviar").hide();
+                $("#btnEliminar").hide();
+                $("#mdlEliminar").modal('toggle');
+            } else {
+                msgShow(data.mensaje, "danger");
+                $("#mdlEliminar").modal('toggle');
+            }
+        }
+    }); 
+}
+
 </script>
 
 

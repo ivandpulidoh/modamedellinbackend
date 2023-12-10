@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entidades\Pedido;
 use Illuminate\Http\Request;
 use App\Entidades\Sucursal;
 require app_path().'/start/constants.php'; // Asegúrate de que este archivo existe y contiene las constantes necesarias
@@ -90,6 +91,25 @@ class ControladorSucursal extends Controller
         $sucursal->obtenerPorId($idSucursal);
         return view("sistema.sucursal-nuevo", compact("titulo", "sucursal"));
     }
+public function eliminar(Request $request){
+		$idSucursal  =  $request->input("id");
+	     $pedido = new Pedido();
+		// si el cliente tiene un pedido asociado no se debo poder eliminar
+		if($pedido->existePedidosPorSucursal($idSucursal)){	
+		$resultado["err"] = EXIT_FAILURE;	
+		$resultado["mensaje"] = "No se puede eliminar un cliente con pedidos asociados";
+		}else {   
+	//sin o si
+	     $sucursal = new Sucursal();
+		$sucursal->idsucursal =  $idSucursal;
+		$sucursal->eliminar();
+		$resultado["err"] = EXIT_SUCCESS;
+		$resultado["mensaje"] = "Registro eliminado exitosamente";
+			}
+		return json_encode($resultado);
+
+		}
+	
 }
 
     
