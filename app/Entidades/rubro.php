@@ -107,6 +107,21 @@ class Rubro extends Model
 
         return $lstRetorno;
     }
+
+public function existePedidosPorRubro($idrubro){
+
+$sql = "SELECT
+                idproveedor,
+                nombre,
+                domicilio,
+                cuit,
+                fk_idrubro
+            FROM proveedores WHERE fk_idrubro =  $idrubro";
+	 	$lstRetorno = DB::select($sql,);
+		return (count($lstRetorno) > 0);
+
+}
+
 }
 
 ?>

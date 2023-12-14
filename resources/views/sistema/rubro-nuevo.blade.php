@@ -31,10 +31,15 @@
 @section('contenido')
 
 <?php
+
 if (isset($msg)) {
 	echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
+	echo '<div id =  "msg"></div>';
+
 }
+
 ?>
+<div id =  "msg"></div>
 <form id="form1" method="POST">
 	<div class="row">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
@@ -60,6 +65,27 @@ if (isset($msg)) {
 			return false;
 		}
 	}
+
+	function eliminar() {
+    $.ajax({
+        type: "GET",
+        url: "{{ asset('admin/rubro/eliminar') }}",
+        data: { id: globalId },
+        async: true,
+        dataType: "json",
+        success: function (data) {
+            if (data.err = 0) {
+                msgShow(data.mensaje, "success");
+                $("#btnEnviar").hide();
+                $("#btnEliminar").hide();
+                $("#mdlEliminar").modal('toggle');
+            } else {
+                msgShow(data.mensaje, "danger");
+                $("#mdlEliminar").modal('toggle');
+            }
+        }
+    }); 
+}
 </script>
 
 

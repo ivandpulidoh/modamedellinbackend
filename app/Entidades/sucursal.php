@@ -143,4 +143,30 @@ class Sucursal extends Model
 
         return $lstRetorno;
     }
+
+public function existeSucursursalPorCliente($idsucursal) {
+    $sql = "SELECT
+                idsucursal,
+                nombre,
+                direccion,
+                telefono,
+                horario
+            FROM sucursales WHERE idsucursal = ?";
+    
+    $lstRetorno = DB::select($sql, [$idsucursal]);
+    return (count($lstRetorno) > 0);
+}
+
+public function eliminarSucursal($idsucursal) {
+    $sql = "SELECT
+                idsucursal,
+                nombre,
+                direccion,
+                telefono,
+                horario
+            FROM sucursales WHERE idsucursal = ?";
+    
+    $lstRetorno = DB::select($sql, [$idsucursal]);
+    return (count($lstRetorno) > 0);
+}
 }

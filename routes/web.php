@@ -180,14 +180,13 @@ route::post('/admin/proveedor/{idProveedor}', 'controladorProveedor@guardar');
 /* CONTROLADOR RUBROS                     */
 /* --------------------------------------------- */
 
- route::get('/admin/rubro/nuevo', 'controladorRubro@nuevo');
- route::post('/admin/rubro/nuevo', 'controladorRubro@guardar');
-route::get('/admin/rubro', 'controladoRrubro@index');
+Route::get('/admin/rubro/nuevo', 'ControladorRubro@nuevo');
+Route::post('/admin/rubro/nuevo', 'ControladorRubro@guardar');
+Route::get('/admin/rubro', 'ControladorRubro@index');
 Route::get('/admin/rubro/cargarGrilla', 'ControladorRubro@cargarGrilla')->name('rubro.cargarGrilla');
- route::get('/admin/rubro/eliminar', 'controladoRubro@eliminar');
-  route::get('/admin/rubro/{idRubro}', 'controladorRubro@editar');
-route::post('/admin/rubro/{idCliente}', 'controladorRubro@guardar');
-
+Route::get('/admin/rubro/eliminar', 'ControladorRubro@eliminar');
+Route::get('/admin/rubro/{idRubro}', 'ControladorRubro@editar');
+Route::post('/admin/rubro/{idCliente}', 'ControladorRubro@guardar');
 
 
 
