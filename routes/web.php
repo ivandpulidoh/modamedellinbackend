@@ -21,7 +21,9 @@ Route::group(array('domain' => '127.0.0.1'), function () {
 	/*WEB ECOMERCE                           */
 	/* --------------------------------------------- */
 	Route::get('/', 'ControladorWebHome@index');
-
+	Route::get('/takeway', 'ControladorWebTakeway@index');
+	Route::get('/nosotros', 'ControladorWebNosotros@index');
+	Route::get('/contacto', 'ControladorWebContacto@index');
 
 
 
