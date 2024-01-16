@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 class ControladorWebLogin extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 	$sucursal = new Sucursal();
 	$aSucursales = $sucursal->obtenerTodos();
 
-	$titulo ="ingresar al sistema";
-            return view("web.login", compact('titulo','aSucursales'));
+	
+            return view("web.login", compact('aSucursales'));
     }
 
 	public function ingresar(Request $request)
@@ -26,7 +26,7 @@ class ControladorWebLogin extends Controller
 
 	$cliente = new Cliente();
 
-	//return view('web.index', compact('aSucursales'));
+	return view('web.index', compact('aSucursales'));
 
 	}
 }
