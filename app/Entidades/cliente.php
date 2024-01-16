@@ -51,31 +51,33 @@ class Cliente extends Model
         return $lstRetorno;
     }
 
-     public function obtenerPorId($idcliente)
-    {
-        $sql = "SELECT
-                idcliente,
-                nombre,
-                telefono,
-                direccion,
-                dni,
-                correo,
-                clave
-                FROM clientes WHERE idcliente = $idcliente";
-        $lstRetorno = DB::select($sql);
+public function obtenerPorId($idcliente)
+{
+    $sql = "SELECT
+            idcliente,
+            nombre,
+            telefono,
+            direccion,
+            dni,
+            correo,
+            clave
+            FROM clientes WHERE idcliente = :idcliente";
 
-        if (count($lstRetorno) > 0) {
-            $this->idcliente = $lstRetorno[0]->idcliente;
-            $this->nombre = $lstRetorno[0]->nombre;
-            $this->telefono = $lstRetorno[0]->telefono;
-            $this->direccion = $lstRetorno[0]->direccion;
-            $this->dni = $lstRetorno[0]->dni;
-            $this->correo = $lstRetorno[0]->correo;
-            $this->clave = $lstRetorno[0]->clave;
-            return $this;
-        }
-        return null;
+    $lstRetorno = DB::select($sql, ['idcliente' => $idcliente]);
+
+    if (count($lstRetorno) > 0) {
+        $this->idcliente = $lstRetorno[0]->idcliente;
+        $this->nombre = $lstRetorno[0]->nombre;
+        $this->telefono = $lstRetorno[0]->telefono;
+        $this->direccion = $lstRetorno[0]->direccion;
+        $this->dni = $lstRetorno[0]->dni;
+        $this->correo = $lstRetorno[0]->correo;
+        $this->clave = $lstRetorno[0]->clave;
+        return $this;
     }
+    return null;
+}
+
 
 public function guardar() {
     $sql = "UPDATE clientes SET

@@ -27,43 +27,54 @@ class ControladorProducto extends Controller
         return view("sistema.producto-listar", compact("titulo", "producto"));
     }
 
-    public function guardar(Request $request)
-    {
-        try {
-            $titulo = "Modificar Producto";
-            $entidad = new Producto();
-		$categoria = new TipoProducto();
-		 $aCategorias = $categoria->obtenerTodos();
-            $entidad->cargarDesdeRequest($request);
+   public function guardar(Request $request)
+{
+    try {
+        $titulo = "Modificar Producto";
+        $entidad = new Producto();
+        $entidad->cargarDesdeRequest($request);
 
-            if ($entidad->nombre == "") {
-                $msg["ESTADO"] = MSG_ERROR;
-                $msg["MSG"] = "Complete todos los datos";
-            } else {
-                if ($request->input("id") > 0) {
-                    $entidad->guardar();
-                    $msg["ESTADO"] = MSG_SUCCESS;
-                    $msg["MSG"] = OKINSERT;
-                } else {
-                    $entidad->insertar();
-                    $msg["ESTADO"] = MSG_SUCCESS;
-                    $msg["MSG"] = OKINSERT;
-                }
-
-                return view('sistema.producto-listar', compact('titulo', 'msg', 'aCategorias'));
-            }
-        } catch (\Exception $e) {
-            $msg["ESTADO"] = MSG_ERROR;
-            $msg["MSG"] = ERRORINSERT;
+        if ($request->hasFile('archivo') && $request->file('archivo')->isValid()) {
+            $imagen = $request->file('archivo');
+            $extension = $imagen->getClientOriginalExtension();
+            $nombre = date("Ymdhmsi") . ".$extension";
+            $rutaAlmacenamiento = env('APP_PATH') . "/public/files/";
+            $imagen->move($rutaAlmacenamiento, $nombre);
+            $entidad->imagen = $nombre;
         }
 
-        $id = $entidad->idproducto;
-        $producto = new Producto();
-        $producto->obtenerPorId($id);
-	  $categoria = new TipoProducto();
-        $aCategorias = $categoria->obtenerTodos();
-        return view('sistema.producto-nuevo', compact('msg', 'producto', 'titulo','aCategorias'));
+        if ($entidad->nombre == "") {
+            // Mensaje de error si el nombre está vacío
+            $msg["ESTADO"] = MSG_ERROR;
+            $msg["MSG"] = "Complete todos los datos";
+        } else {
+            if ($request->input("id") > 0) {
+                $productAnt = new Producto();
+                $productAnt->obtenerPorId($entidad->idproducto);
+
+                if ($request->hasFile('archivo') && $request->file('archivo')->isValid()) {
+                    @unlink(env('APP_PATH') . "/public/files/{$productAnt->imagen}");
+                } else {
+                    $entidad->imagen = $productAnt->imagen;
+                }
+                $entidad->guardar();
+
+                $msg["ESTADO"] = MSG_SUCCESS;
+                $msg["MSG"] = "Producto actualizado exitosamente";
+            } else {
+                $entidad->insertar();
+
+                $msg["ESTADO"] = MSG_SUCCESS;
+                $msg["MSG"] = "Producto creado exitosamente";
+            }
+        }
+    } catch (\Exception $e) {
+        $msg["ESTADO"] = MSG_ERROR;
+        $msg["MSG"] = "Error al guardar el producto: " . $e->getMessage();
     }
+
+    return view('sistema.producto-listar', compact('msg', 'titulo'));
+}
 
     public function cargarGrilla(Request $request)
     {
@@ -82,6 +93,7 @@ class ControladorProducto extends Controller
             $row[] = $producto->cantidad;
             $row[] = $producto->precio;
 		$row[] = $producto->descripcion;
+		$row[] =  " <img src='/files/" . $producto->imagen ."' class='img-thumbnail'>";
             $data[] = $row;
 
             $cont++;

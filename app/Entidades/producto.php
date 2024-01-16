@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
-    protected $table = 'proveedor';
+    protected $table = 'productos';
     public $timestamps = false;
 
     protected $fillable = [
@@ -30,7 +30,7 @@ class Producto extends Model
         $this->cantidad = $request->input('txtCantidad');
         $this->precio = $request->input('txtPrecio');
 	  $this->descripcion = $request->input('txtDescripcion');
-	  $this->imagen = $request->input('txtImagen');
+	  $this->imagen = $request->input('archivo');
     }
 
     public function obtenerTodos()
@@ -83,7 +83,7 @@ class Producto extends Model
                     cantidad=?,
                     precio=?,
 			  descripcion=?,
-			  imagen=?
+			  imagen=?,
                 WHERE idproducto=?";
         $affected = DB::update($sql, [
             $this->nombre,
@@ -138,6 +138,7 @@ class Producto extends Model
             1 => 'cantidad',
             2 => 'precio',
             3 => 'descripcion',
+		4 => 'imagen',
         );
         $sql = "SELECT	
 			idproducto, 
@@ -156,6 +157,7 @@ class Producto extends Model
             $sql .= " OR cantidad LIKE '%" . $request['search']['value'] . "%' ";
             $sql .= " OR precio LIKE '%" . $request['search']['value'] . "%' ";
             $sql .= " OR descripcion LIKE '%" . $request['search']['value'] . "%' )";
+		 $sql .= " OR imagen LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . " " . $request['order'][0]['dir'];
 

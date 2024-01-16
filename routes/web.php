@@ -30,6 +30,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
 	Route::get('/cambiar-clave', 'ControladorWebCambiarClave@index');
 	Route::get('/contacto-gracias', 'ControladorWebContacto-gracias@index');
 	Route::get('/login', 'ControladorWebLogin@index');
+	Route::get('/login', 'ControladorWebLogin@ingresar');
 	Route::get('/registrarse', 'ControladorWebRegistrarse@index');
 	Route::get('/recuperar-clave', 'ControladorWebRecuperarClave@index');
 
@@ -56,6 +57,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
 	Route::get('/admin/logout', 'ControladorLogin@logout');
 	Route::post('/admin/logout', 'ControladorLogin@entrar');
 	Route::post('/admin/login', 'ControladorLogin@entrar');
+	Route::get('/login', 'ControladorWebLogin@ingresar');
 
 	/* --------------------------------------------- */
 	/* CONTROLADOR RECUPERO CLAVE                    */

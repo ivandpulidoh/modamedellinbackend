@@ -13,7 +13,7 @@
   <meta name="author" content="" />
   <link rel="shortcut icon" href="web/images/favicon.png" type="">
 
-  <title> Feane </title>
+  <title> Burguers </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="web/css/bootstrap.css" />
@@ -151,25 +151,25 @@
         <div class="col-md-4 footer-col">
           <div class="footer_contact">
             <h4>
-              Contact Us
+              Contacta con 
             </h4>
             <div class="contact_link_box">
               <a href="">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                 <span>
-                  Location
+                 Pradera <br> Carrera 67 #4B-85
                 </span>
               </a>
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                  Call +01 1234567890
+                
                 </span>
               </a>
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  demo@gmail.com
+                  mikelcajas@hotmail.com
                 </span>
               </a>
             </div>
@@ -178,48 +178,40 @@
         <div class="col-md-4 footer-col">
           <div class="footer_detail">
             <a href="" class="footer-logo">
-              Feane
+              Mikel
             </a>
             <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
+             En nuestra empresa, nos enorgullece ofrecer cajas de cartón elaboradas con materiales ecoamigables y biodegradables. En particular, nuestras cajas están elaboradas con caña de azúcar, lo que nos permite ofrecer un producto que no solo es resistente y de alta calidad, sino también respetuoso con el medio ambiente.!
             </p>
             <div class="footer_social">
               <a href="">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
               </a>
               <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
-              </a>
-              <a href="">
                 <i class="fa fa-instagram" aria-hidden="true"></i>
               </a>
-              <a href="">
-                <i class="fa fa-pinterest" aria-hidden="true"></i>
-              </a>
+           
             </div>
           </div>
         </div>
         <div class="col-md-4 footer-col">
           <h4>
-            Opening Hours
+           Horario de apertura
           </h4>
           <p>
-            Everyday
+            Lunes a sabado
           </p>
           <p>
-            10.00 Am -10.00 Pm
+            80.00 Am -5.00 Pm<br>
+		sabados 9am a 2pm
           </p>
         </div>
       </div>
       <div class="footer-info">
         <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a><br><br>
-          &copy; <span id="displayYear"></span> Distributed By
-          <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+          &copy; <span id="displayYear"></span> All Rights Reserved By mikelcajas
+       
+          
         </p>
       </div>
     </div>
