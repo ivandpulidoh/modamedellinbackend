@@ -2,7 +2,11 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-	globalId = '<?php echo isset($pedido->idpedido) && $pedido->idpedido > 0 ? $pedido->idpedido : 0; ?>';
+	globalId = '<?php
+
+use App\Entidades\Producto;
+
+ echo isset($pedido->idpedido) && $pedido->idpedido > 0 ? $pedido->idpedido : 0; ?>';
 	<?php $globalId = isset($pedido->idpedido) ? $pedido->idpedido : "0"; ?>
 </script>
 @endsection
@@ -36,7 +40,7 @@ if (isset($msg)) {
 	echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
-<div id =  "msg"></div>
+<div id="msg"></div>
 <form id="form1" method="POST">
 	<div class="row">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
@@ -46,41 +50,88 @@ if (isset($msg)) {
 			<input type="date" id="txtFecha" name="txtFecha" class="form-control" value="{{ $pedido->fecha }}" required>
 		</div>
 
-		
-				<div class="form-group col-lg-6">
+
+		<div class="form-group col-lg-6">
 			<label for="txtCliente">Cliente</label>
 			<select name="txtCliente" id="txtCliente" class="form-control">
 				<option value="{{ $aClientes[0]->nombre }}" disabled selected>Seleccionar</option>
 				@foreach($aClientes as $cliente)
-					<option value="{{ $cliente->idcliente }}">{{ $cliente->nombre }}</option>
+				<option value="{{ $cliente->idcliente }}">{{ $cliente->nombre }}</option>
 				@endforeach
 			</select>
-			</div>
+		</div>
 
-	<div class="form-group col-lg-6">
-    <label for="txtSucursal">Sucursal *</label>
-    <select name="txtSucursal" id="txtSucursal" class="form-control">
-        <option value="{{ $aCategorias[0]->nombre }}" disabled selected>Seleccionar</option>
-        @foreach($aCategorias as $categoria)
-            @if (!$loop->first)
-                <option value="{{ $categoria->idsucursal }}">{{ $categoria->nombre }}</option>
-            @endif
-        @endforeach
-    </select>
-</div>
+		<div class="form-group col-lg-6">
+			<label for="txtSucursal">Sucursal *</label>
+			<select name="txtSucursal" id="txtSucursal" class="form-control">
+				<option value="{{ $aCategorias[0]->nombre }}" disabled selected>Seleccionar</option>
+				@foreach($aCategorias as $categoria)
+
+				<option value="{{ $categoria->idsucursal }}">{{ $categoria->nombre }}</option>
+
+				@endforeach
+			</select>
+		</div>
 
 
 
 		<div class="form-group col-lg-6">
 			<label for="txtEstadoPedido">Estado Pedido: *</label>
-			<input type="text" id="txtEstadoPedido" name="txtEstadoPedido" class="form-control" value="{{ $pedido->estadoPedido }}" required>
+			<select id="txtEstadoPedido" name="txtEstadoPedido" class="form-control">
+				@foreach($aEstadoPedidos as $estadoPedido)
+				@if($estadoPedido->idestadopedido == $pedido->fk_idestadoPedido)
+				<option selected value="{{ $estadoPedido->idestadopedido }}">{{ $estadoPedido->idestadopedido }}</option>
+				@else
+				<option value="{{ $estadoPedido->idestadopedido }}">{{ $estadoPedido->nombre }}</option>
+				@endif
+				@endforeach
+			</select>
 		</div>
+
 
 		<div class="form-group col-lg-6">
 			<label for="txtPrecio">Precio: *</label>
 			<input type="text" text="txtPrecio" name="txtPrecio" class="form-control" value="{{ $pedido->precio }}" required>
 		</div>
+
+
+		<div class="form-group col-lg-6">
+			<label for="txtPego">Estado Pedido: *</label>
+			<select id="txtPago" name="txtPago" class="form-control " require>
+				<option value="" disabled selected>Seleccionar</option>
+
+				<option <?php echo $pedido->pago == "Mercadopago" ? "selected" : "";  ?> value="MercadoPago">Mercado pago</option>
+
+				<option <?php echo $pedido->pago == "Efectivo" ? "selected" : "";  ?> value="Efectivo">Efectivo</option>
+
+			</select>
+		</div>
+
 	</div>
+		@if($pedido->idpedido > 0)
+		<div class="row">
+			<div class="col-12">
+				<label>Listado de productos</label>
+			</div>
+				<div class="col-12">
+				<table class="table table-hover border">
+				<tr>
+					<th>Imagen</th>
+					<th>Producto</th>
+					<th>Cantidad</th>
+				</tr>
+			@foreach ($aPedidoProductos as $producto);
+				<tr>
+					<td><img src="/files/<?php  echo  $producto->imagen;   ?>" 	stye="width:50px"></td>
+					<td>{{$pedido->nombre}}</td>
+					<td>{{$producto->cantidad}}</td>
+				</tr>
+			@endforeach
+			
+				</table>
+			</div>
+		</div>
+		@endif
 </form>
 
 <script>
@@ -97,30 +148,29 @@ if (isset($msg)) {
 		}
 	}
 
-    function eliminar() {
-        $.ajax({
-            type: "GET",
-            url: "{{ asset('admin/pedido/eliminar') }}",
-            data: { id:globalId },
-            async: true,
-            dataType: "json",
-            success: function (data) {
-                if (data.err = 0) {
-                    msgShow(data.mensaje ,"success");
-		$("#btnEnviar").hide();
-		$("#btnEliminar").hide();
-		$("#mdlEliminar").modal('toggle');
-                } else {
-                     msgShow(data.mensaje, "danger");
-			$("#mdlEliminar").modal('toggle');
-                }
-        
-            }
-        });
-    }
+	function eliminar() {
+		$.ajax({
+			type: "GET",
+			url: "{{ asset('admin/pedido/eliminar') }}",
+			data: {
+				id: globalId
+			},
+			async: true,
+			dataType: "json",
+			success: function(data) {
+				if (data.err = 0) {
+					msgShow(data.mensaje, "success");
+					$("#btnEnviar").hide();
+					$("#btnEliminar").hide();
+					$("#mdlEliminar").modal('toggle');
+				} else {
+					msgShow(data.mensaje, "danger");
+					$("#mdlEliminar").modal('toggle');
+				}
 
-
-
+			}
+		});
+	}
 </script>
 
 

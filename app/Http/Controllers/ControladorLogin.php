@@ -32,8 +32,8 @@ class ControladorLogin extends Controller
         return redirect('admin/login');
     }
 
-    public function entrar(Request $request){
-
+    public function entrar(Request $request)
+    {
         $usuarioIngresado = fescape_string($request->input('txtUsuario'));
         $claveIngresada = fescape_string($request->input('txtClave'));
 
@@ -50,31 +50,32 @@ class ControladorLogin extends Controller
                 $usuario->idusuario = $lstUsuario[0]->idusuario;
                 $usuario->actualizarFechaIngreso();
 
-                //Carga los grupos de cuentas de usuario
+                // Carga los grupos de cuentas de usuario
                 $grupo = new Area();
                 $aGrupo = $grupo->obtenerAreasDelUsuario($lstUsuario[0]->idusuario);
                 $request->session()->put('array_grupos', $aGrupo);
 
-                //Grupo predeterminado
+                // Grupo predeterminado
                 if (isset($lstUsuario[0]->areapredeterminada) && $lstUsuario[0]->areapredeterminada != "") {
                     $request->session()->put('grupo_id', $lstUsuario[0]->areapredeterminada);
                 } else {
                     $request->session()->put('grupo_id', $aGrupo[0]->idarea);
                 }
 
-                //Carga los permisos del usuario
+                // Carga los permisos del usuario
                 $familia = new Patente();
                 $aPermisos = $familia->obtenerPatentesDelUsuario();
                 if (count($aPermisos) > 0) {
                     $request->session()->put('array_permisos', $aPermisos);
                 }
 
-                //Carga el menu
+                // Carga el menu
                 $menu = new Menu();
                 $aMenu = $menu->obtenerMenuDelGrupo(Session::get('grupo_id'));
                 if (count($aMenu) > 0) {
                     $request->session()->put('array_menu', $aMenu);
                 }
+
                 return view('sistema.index', compact('titulo'));
             } else {
                 $titulo = 'Acceso denegado';

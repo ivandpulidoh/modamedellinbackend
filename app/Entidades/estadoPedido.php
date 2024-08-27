@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Entidades\Entidades;
+namespace App\Entidades;
 
 
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
-class Estado_pedido extends Model
+class EstadoPedido extends Model
 {
 
 protected $table = 'estado_pedidos';

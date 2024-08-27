@@ -27,13 +27,13 @@ class Cliente extends Model
     ];
 
     public function cargarDesdeRequest($request) {
-        $this->idcliente = $request->input('id') != "0" ? $request->input('id') : $this->idmenu;
+        $this->idcliente = $request->input('id') != "0" ? $request->input('id') : $this->idcliente;
         $this->nombre = $request->input('txtNombre');
         $this->telefono = $request->input('txtTelefono');
         $this->direccion = $request->input('txtDireccion');
         $this->dni = $request->input('txtDni');
         $this->correo = $request->input('txtCorreo');
-        $this->clave = $request->input('txtClave');
+        $this->clave = password_hash($request->input('txtClave'), PASSWORD_DEFAULT);
     }
 
         public function obtenerTodos()
@@ -158,6 +158,34 @@ public function insertar()
 
         return $lstRetorno;
     }
+public function obtenerPorCorreo($correo){
+{
+    $sql = "SELECT
+            idcliente,
+            nombre,
+            telefono,
+            direccion,
+            dni,
+            correo,
+            clave
+            FROM clientes WHERE correo ='$correo'";
+
+    $lstRetorno = DB::select($sql);
+
+    if (count($lstRetorno) > 0) {
+        $this->idcliente = $lstRetorno[0]->idcliente;
+        $this->nombre = $lstRetorno[0]->nombre;
+        $this->telefono = $lstRetorno[0]->telefono;
+        $this->direccion = $lstRetorno[0]->direccion;
+        $this->dni = $lstRetorno[0]->dni;
+        $this->correo = $lstRetorno[0]->correo;
+        $this->clave = $lstRetorno[0]->clave;
+        return $this;
+    }
+    return null;
+}
+
+}
 
 
 }

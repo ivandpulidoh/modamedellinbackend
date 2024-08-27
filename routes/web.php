@@ -20,19 +20,28 @@ Route::group(array('domain' => '127.0.0.1'), function () {
 	/* --------------------------------------------- */
 	/*WEB ECOMERCE                           */
 	/* --------------------------------------------- */
-	Route::get('/', 'ControladorWebHome@index');
+Route::get('/', 'ControladorWebHome@index');
 Route::get('/takeway', 'ControladorWebTakeway@index');
+Route::post('/takeway', 'ControladorWebTakeway@insertar');
 Route::get('/nosotros', 'ControladorWebNosotros@index');
 Route::get('/contacto', 'ControladorWebContacto@index');
+Route::post('/contacto', 'ControladorWebContacto@enviar');
 Route::get('/postulacion-gracias', 'ControladorWebPostulacionGracias@index');
 Route::get('/carrito', 'ControladorWebCarrito@index');
+Route::post('/carrito', 'ControladorWebCarrito@procesar');
 Route::get('/mi-cuenta', 'ControladorWebMicuenta@index');
+Route::post('/mi-cuenta', 'ControladorWebMicuenta@guardar');
 Route::get('/cambiar-clave', 'ControladorWebCambiarClave@index');
+Route::post('/cambiar-clave', 'ControladorWebCambiarClave@cambiar');
 Route::get('/contacto-gracias', 'ControladorWebContactoGracias@index'); // Corrected URL
 Route::get('/login', 'ControladorWebLogin@index');
-Route::get('/ingresar', 'ControladorWebLogin@ingresar'); // Corrected URL
+Route::get('/logout', 'ControladorWebLogin@logout'); // Corrected URL
+Route::post('/login', 'ControladorWebLogin@ingresar'); // Corrected URL
 Route::get('/registrarse', 'ControladorWebRegistrarse@index');
-Route::get('/recuperar-clave', 'ControladorWebRecuperarClave@index');
+Route::post('/registrarse', 'ControladorWebRegistrarse@registrarse');
+Route::get('/recuperarClave', 'ControladorWebRecuperarClave@index');
+Route::post('/recuperarClave', 'ControladorWebRecuperarClave@recuperar');
+
 
 
 
@@ -57,7 +66,7 @@ Route::get('/recuperar-clave', 'ControladorWebRecuperarClave@index');
 	Route::get('/admin/logout', 'ControladorLogin@logout');
 	Route::post('/admin/logout', 'ControladorLogin@entrar');
 	Route::post('/admin/login', 'ControladorLogin@entrar');
-	Route::get('/login', 'ControladorWebLogin@ingresar');
+	
 
 	/* --------------------------------------------- */
 	/* CONTROLADOR RECUPERO CLAVE                    */

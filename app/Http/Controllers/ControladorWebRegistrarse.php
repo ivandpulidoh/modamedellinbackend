@@ -1,39 +1,44 @@
 <?php
 
 namespace App\Http\Controllers;
-use app\Entidades\Sucursal;
+
+use App\Entidades\Sucursal;
 use App\Entidades\Cliente;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ControladorWebRegistrarse extends Controller
 {
-	public function index()
-	{
-		$sucursal = new Sucursal;
-		$aSucursales = $sucursal->odtenerTodos();
-		return view("web.registrarse", compact("aSucursales"));
-	}
+    const MSG_ERROR = "error"; // Define la constante MSG_ERROR
 
-	public function registrarse(Request $request)
-	{
-		$titulo = "Nuevo Registro";
-		$entidad = new Cliente;
-		$entidad->nombre = $request->input("txtNombre");
-		$entidad->clave = password_hash($request->input("txtClave"), PASSWORD_DEFAULT);
+    public function index()
+    {
+        $sucursal = new Sucursal;
+        $aSucursales = $sucursal->obtenerTodos();
+        return view("web.registrarse", compact("aSucursales"));
+    }
 
-		if ($entidad->nombre == "" || $entidad->telefono == "" || $entidad->direccion == "") {
-			$msg["ESTADO"] = MSG_ERROR;
-			$msg["MSG"] = "Complete todos los datos";
-		} else {
+    public function registrarse(Request $request)
+    {
+        $titulo = "Nuevo Registro";
+        $entidad = new Cliente();
+        $entidad->nombre = $request->input("txtNombre");
+        $entidad->clave = password_hash($request->input("txtClave"), PASSWORD_DEFAULT);
+        $entidad->direccion = $request->input("txtDireccion");
+        $entidad->telefono = $request->input("txtTelefono");
+	  $entidad->dni = $request->input("txtDni");
+        $entidad->correo = $request->input("txtCorreo");
 
-			if ($_POST) {
-				$entidad->guardar();
+        $sucursal = new Sucursal;
+        $aSucursales = $sucursal->obtenerTodos();
 
-				$msg["ESTADO"] = MSG_SUCCESS;
-				$msg["MSG"] = "Registro Exitoso";
-			}
-
-			// Aquí deberías realizar alguna acción con $nombre y $contrasena, ya que hasta ahora solo los has obtenido.
-		}
-	}
+        if ($entidad->nombre == "" || $entidad->telefono == "" || $entidad->direccion == "") {
+            $msg["ESTADO"] =  MSG_ERROR;
+            $msg["MSG"] = "Complete todos los datos";
+            return view("web.registrarse", compact('titulo', 'msg', 'aSucursales'));
+        } else {
+		$entidad->insertar();
+           return redirect("/login");
+        }
+    }
 }

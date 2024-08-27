@@ -91,7 +91,7 @@ class ControladorProducto extends Controller
             $row = array();
             $row[] = "<a href='/admin/producto/" . $producto->idproducto . "'>" . $producto->nombre . "</a>";
             $row[] = $producto->cantidad;
-            $row[] = $producto->precio;
+            $row[] = number_format($producto->precio, 0, ",", ".") ;
 		$row[] = $producto->descripcion;
 		$row[] =  " <img src='/files/" . $producto->imagen ."' class='img-thumbnail'>";
             $data[] = $row;

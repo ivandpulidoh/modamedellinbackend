@@ -1,6 +1,12 @@
 @extends("web.plantilla")
 @section("contenido")
-  
+  <?php
+if (isset($msg)) {
+	echo ' <div id =  "msg"></div>';
+	echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
+}
+?>
+<div id="msg"></div>
 
 <!-- book section -->
   <section class="book_section layout_padding">
@@ -13,41 +19,24 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="">
+             <form action="" method="POST">
+		  <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div>
-                <input type="text" class="form-control" placeholder="Nombre" />
+                <input type="text" class="form-control" placeholder="Nombre" name="txtNombre" id="txtNombre" />
               </div>
               <div>
-                <input type="text" class="form-control" placeholder="Telefono" />
+                <input type="text" class="form-control" placeholder="Telefono" name="txtTelefono" id="txtTelefono" />
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Correo" />
+                <input type="email" class="form-control" placeholder="Correo" name="txtCorreo" id="txtCorreo" />
               </div>
+            <textarea name="txtComentario" id="txtComentario" class="form-control" placeholder="Escribe"></textarea>
               <div>
-                <select class="form-control nice-select wide">
-                  <option value="" disabled selected>
-                    cuanta personas
-                  </option>
-                  <option value="">
-                    2
-                  </option>
-                  <option value="">
-                    3
-                  </option>
-                  <option value="">
-                    4
-                  </option>
-                  <option value="">
-                    5
-                  </option>
-                </select>
-              </div>
-              <div>
-                <input type="date" class="form-control">
+               
               </div>
               <div class="btn_box">
                 <button>
-                  RESERVA YA
+                 ENVIAR
                 </button>
               </div>
             </form>

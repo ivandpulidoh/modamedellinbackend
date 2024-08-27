@@ -31,6 +31,7 @@ if (isset($msg)) {
             <th>Cliente</th>
             <th>Sucursal</th>
 		<th>Estado</th>
+		<th>Total</th>
         </tr>
     </thead >
 </table> 

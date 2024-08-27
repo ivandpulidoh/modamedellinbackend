@@ -8,7 +8,16 @@
 				Registrarse
 			</h2>
 		</div>
-	</div>
+	@if(isset($msg))
+    <div class="row">
+        <div class="col-md-6">
+            <div class="alert alert-{{ $msg['ESTADO'] }}" role="alert">
+                {{ $msg['MSG'] }}
+            </div>
+        </div>
+    </div>
+@endif
+
 
 	<div class="row">
 		<div class="col-md-6">
@@ -24,6 +33,10 @@
 
 					</div>
 					<div>
+						<input type="text" id="txtDni" name="txtDni" class="form-control" placeholder="Dni" />
+
+					</div>
+					<div>
 						<input type="text" id="txtDireccion" name="txtDireccion" class="form-control" placeholder="Direccion" />
 
 					</div>
@@ -31,18 +44,21 @@
 						<input type="text" id="txtCorreo" name="txtCorreo" class="form-control" placeholder="correo" />
 
 					</div>
-					<div>
-						<input type="text" id="txtDni" name="txtDni" class="form-control" placeholder="Dni" />
-
-					</div>
+					
 					<div>
 						<input type="text" id="txtClave" name="txtClave" class="form-control" placeholder="Clave" />
 
 					</div>
 
+					<div class="btn_box">
+						<button>
+						ENVIAR
+						</button>
+					</div>
 
 				</form>
 			</div>
 		</div>
 	</div>
 </section>
+@endsection
