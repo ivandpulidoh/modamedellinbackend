@@ -1,233 +1,193 @@
 @extends("web.plantilla")
 @section("banner")
-    <!-- slider section -->
-    <section class="slider_section ">
-      <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="container ">
-              <div class="row">
-                <div class="col-md-7 col-lg-6 ">
-                  <div class="detail-box">
-                    <h1>
-                    Hamburguesas a domicilio
-                    </h1>
-                    <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                       Orna ahora
-                      </a>
-                    </div>
+<!-- slider section -->
+<main class="main">
+      <section class="home-slider position-relative mb-30">
+            <div class="container">
+                  <div class="home-slide-cover bg-grey-10 mt-30">
+                        <div class="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1">
+                              <div class="single-hero-slider single-animation-wrap">
+                                    <div class="container">
+                                          <div class="row align-items-center slider-animated-1">
+                                                <div class="col-lg-5 col-md-6">
+                                                      <div class="hero-slider-content-2">
+                                                            <h4 class="animated">Trade-In Offer</h4>
+                                                            <h3 class="animated fw-900">Supper Value Deals</h3>
+                                                            <h2 class="animated fw-900 text-brand">On All Products</h2>
+                                                            <p class="animated">Save more with coupons & up to 70% off
+                                                            </p>
+                                                            <a class="animated btn btn-brush btn-brush-3"
+                                                                  href="shop-product-right.html" tabindex="0"> Shop Now
+                                                            </a>
+                                                      </div>
+                                                </div>
+                                                <div class="col-lg-7 col-md-6">
+                                                      <div class="single-slider-img single-slider-img-1">
+                                                            <img class="animated" src="web/images/slider/slider-6.png"
+                                                                  alt="">
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="single-hero-slider single-animation-wrap">
+                                    <div class="container">
+                                          <div class="row align-items-center slider-animated-1">
+                                                <div class="col-lg-5 col-md-6">
+                                                      <div class="hero-slider-content-2">
+                                                            <h4 class="animated">Hot promotions</h4>
+                                                            <h3 class="animated fw-900">Fashion Trending</h3>
+                                                            <h2 class="animated fw-900 text-brand">Great Collection</h2>
+                                                            <p class="animated">Save more with coupons & up to 20% off
+                                                            </p>
+                                                            <a class="animated btn btn-brush btn-brush-1"
+                                                                  href="shop-product-right.html" tabindex="0"> Get It
+                                                                  Now </a>
+                                                      </div>
+                                                </div>
+                                                <div class="col-lg-7 col-md-6">
+                                                      <div class="single-slider-img single-slider-img-1">
+                                                            <img class="animated" src="web/images/slider/slider-7.png"
+                                                                  alt="">
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="slider-arrow hero-slider-1-arrow"></div>
                   </div>
-                </div>
-              </div>
             </div>
-          </div>
-          <div class="carousel-item ">
-            <div class="container ">
-              <div class="row">
-                <div class="col-md-7 col-lg-6 ">
-                  <div class="detail-box">
-                    <h1>
-                      Fast Food Restaurant
-                    </h1>
-                    <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Order Now
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="container ">
-              <div class="row">
-                <div class="col-md-7 col-lg-6 ">
-                  <div class="detail-box">
-                    <h1>
-                      Fast Food Restaurant
-                    </h1>
-                    <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Order Now
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="container">
-          <ol class="carousel-indicators">
-            <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
-            <li data-target="#customCarousel1" data-slide-to="1"></li>
-            <li data-target="#customCarousel1" data-slide-to="2"></li>
-          </ol>
-        </div>
-      </div>
-
-    </section>
-    <!-- end slider section -->
+      </section>
+</main>
+<!-- end slider section -->
 @endsection
 
-  <!-- offer section -->
+<!-- offer section -->
 @section("contenido")
-  <section class="offer_section layout_padding-bottom">
-    <div class="offer_container">
-      <div class="container ">
-        <div class="row">
-          <div class="col-md-6  ">
-            <div class="box ">
-              <div class="img-box">
-                <img src="web/images/o1.jpg" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Tasty Thursdays
-                </h5>
-                <h6>
-                  <span>20%</span> Off
-                </h6>
-                <a href="">
-                  Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                    <g>
-                      <g>
-                        <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                     c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                      </g>
-                    </g>
-                    <g>
-                      <g>
-                        <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                     C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                     c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                     C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                      </g>
-                    </g>
-                    <g>
-                      <g>
-                        <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                     c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                      </g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                  </svg>
-                </a>
-              </div>
+
+<section class="product-tabs section-padding position-relative wow fadeIn animated animated animated"
+      style="visibility: visible;">
+      <div class="bg-square"></div>
+      <div class="container">
+            <div class="tab-header">
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                              <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab"
+                                    data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one"
+                                    aria-selected="true">Featured</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two"
+                                    type="button" role="tab" aria-controls="tab-two"
+                                    aria-selected="false">Popular</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab"
+                                    data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three"
+                                    aria-selected="false">New added</button>
+                        </li>
+                  </ul>
+                  <a href="#" class="view-more d-none d-md-flex">View More<i
+                              class="fi-rs-angle-double-small-right"></i></a>
             </div>
-          </div>
-          <div class="col-md-6  ">
-            <div class="box ">
-              <div class="img-box">
-                <img src="web/images/o2.jpg" alt="">
-              </div>
-              <div class="detail-box">
-                <h5>
-                  Pizza Days
-                </h5>
-                <h6>
-                  <span>15%</span> Off
-                </h6>
-                <a href="">
-                  Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                    <g>
-                      <g>
-                        <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                     c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                      </g>
-                    </g>
-                    <g>
-                      <g>
-                        <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                     C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                     c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                     C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                      </g>
-                    </g>
-                    <g>
-                      <g>
-                        <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                     c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                      </g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                    <g>
-                    </g>
-                  </svg>
-                </a>
-              </div>
+            <!--End nav-tabs-->
+            <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                  <div class="row product-grid-4">
+                        <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                              <div class="product-cart-wrap mb-30">
+                                    <div class="product-img-action-wrap">
+                                          <div class="product-img product-img-zoom">
+                                                <a href="shop-product-right.html">
+                                                      <img class="default-img" src="web/images/shop/product-1-1.jpg"
+                                                            alt="">
+                                                      <img class="hover-img" src="web/images/shop/product-1-2.jpg"
+                                                            alt="">
+                                                </a>
+                                          </div>
+                                          <div class="product-action-1">
+                                                <a aria-label="Quick view" class="action-btn hover-up"
+                                                      data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
+                                                            class="fi-rs-eye"></i></a>
+                                                <a aria-label="Add To Wishlist" class="action-btn hover-up"
+                                                      href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                                <a aria-label="Compare" class="action-btn hover-up"
+                                                      href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                          </div>
+                                          <div class="product-badges product-badges-position product-badges-mrg">
+                                                <span class="hot">Hot</span>
+                                          </div>
+                                    </div>
+                                    <div class="product-content-wrap">
+                                          <div class="product-category">
+                                                <a href="shop-grid-right.html">Clothing</a>
+                                          </div>
+                                          <h2><a href="shop-product-right.html">Colorful Pattern Shirts</a></h2>
+                                          <div class="rating-result" title="90%">
+                                                <span>
+                                                      <span>90%</span>
+                                                </span>
+                                          </div>
+                                          <div class="product-price">
+                                                <span>$238.85 </span>
+                                                <span class="old-price">$245.8</span>
+                                          </div>
+                                          <div class="product-action-1 show">
+                                                <a aria-label="Add To Cart" class="action-btn hover-up"
+                                                      href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                              <div class="product-cart-wrap mb-30">
+                                    <div class="product-img-action-wrap">
+                                          <div class="product-img product-img-zoom">
+                                                <a href="shop-product-right.html">
+                                                      <img class="default-img" src="web/images/shop/product-2-1.jpg"
+                                                            alt="">
+                                                      <img class="hover-img" src="web/images/shop/product-2-2.jpg"
+                                                            alt="">
+                                                </a>
+                                          </div>
+                                          <div class="product-action-1">
+                                                <a aria-label="Quick view" class="action-btn hover-up"
+                                                      data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
+                                                            class="fi-rs-eye"></i></a>
+                                                <a aria-label="Add To Wishlist" class="action-btn hover-up"
+                                                      href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                                <a aria-label="Compare" class="action-btn hover-up"
+                                                      href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                          </div>
+                                          <div class="product-badges product-badges-position product-badges-mrg">
+                                                <span class="new">New</span>
+                                          </div>
+                                    </div>
+                                    <div class="product-content-wrap">
+                                          <div class="product-category">
+                                                <a href="shop-grid-right.html">Clothing</a>
+                                          </div>
+                                          <h2><a href="shop-product-right.html">Plain Color Pocket Shirts</a></h2>
+                                          <div class="rating-result" title="90%">
+                                                <span>
+                                                      <span>50%</span>
+                                                </span>
+                                          </div>
+                                          <div class="product-price">
+                                                <span>$138.85 </span>
+                                                <span class="old-price">$255.8</span>
+                                          </div>
+                                          <div class="product-action-1 show">
+                                                <a aria-label="Add To Cart" class="action-btn hover-up"
+                                                      href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+
+
             </div>
-          </div>
-        </div>
       </div>
-    </div>
-  </section>
+</section>
 @endsection
-  
