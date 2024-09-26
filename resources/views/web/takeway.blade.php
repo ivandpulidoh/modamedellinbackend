@@ -42,10 +42,9 @@
                                     <div class="product-img-action-wrap">
                                           <div class="product-img product-img-zoom">
                                                 <a href="shop-product-right.html">
-                                                      <img class="default-img" src="web/images/shop/product-1-1.jpg"
+                                                      <img class="default-img" src="files/{{ $producto->imagen }}"
                                                             alt="">
-                                                      <img class="hover-img" src="web/images/shop/product-1-2.jpg"
-                                                            alt="">
+                                                      <img class="hover-img" src="files/{{ $producto->imagen }}" alt="">
                                                 </a>
                                           </div>
                                           <div class="product-action-1">
@@ -65,24 +64,36 @@
                                           <div class="product-category">
                                                 <a href="shop-grid-right.html">Clothing</a>
                                           </div>
-                                          <h2><a href="shop-product-right.html">Colorful Pattern Shirts</a></h2>
+                                          <h2><a href="shop-product-right.html">{{ $producto->nombre}}</a></h2>
                                           <div class="rating-result" title="90%">
                                                 <span>
                                                       <span>90%</span>
                                                 </span>
                                           </div>
                                           <div class="product-price">
-                                                <span>$238.85 </span>
-                                                <span class="old-price">$245.8</span>
+                                                <span> ${{ number_format($producto->precio, 0, ",", ".") }}</span>
+                                                <span class="old-price">
+                                                      ${{ number_format($producto->precio, 0, ",", ".") }}</span>
                                           </div>
-                                          <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" class="action-btn hover-up"
-                                                      href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                          <div class="product-action-1 show">                                                
+                                                <form id="carritoForm" method="POST">
+                                                      <input type="hidden" name="_token"
+                                                            value="{{ csrf_token() }}"></input>
+                                                      <input type="input" id="txtProducto" name="txtProducto"
+                                                            class="form-control" style="width: 100px ;"
+                                                            value="{{$producto->idproducto}}" />
+                                                      <input type="hidden" id="txtCantidad" name="txtCantidad"
+                                                            class="form-control" style="width: 100px ;" value="1" />
+                                                      <a aria-label="Add To Cart" class="action-btn hover-up"
+                                                            href="" 
+                                                            onclick="document.getElementById('carritoForm').submit(); return false;"><i
+                                                                  class="fi-rs-shopping-bag-add"></i></a>
+                                                </form>
                                           </div>
                                     </div>
                               </div>
                         </div>
-				@endforeach
+                        @endforeach
                   </div>
             </div>
       </div>
