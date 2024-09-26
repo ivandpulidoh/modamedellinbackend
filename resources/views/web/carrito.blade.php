@@ -12,7 +12,8 @@
             <div class="col-md-9">
                 <div class="row m-2-12">
                     <div class="col-md-12">
-                        <table class="table">
+                        <div class="table-responsive">
+                        <table class="table shopping-summery text-center clean">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -33,8 +34,8 @@
                                 <tr>
                                     <form action="" method="POST">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <td style="width: 0px;">
-                                            <input type="text" name="txtCarrito" class="form-control" value="{{ $carrito->idcarrito }}" required>
+                                        <td stye="width: 0px;">
+                                            <input type="hidden" name="txtCarrito" class="form-control" value="{{ $carrito->idcarrito }}" required>
                                         </td>
                                         <td style="width:100px;">
                                             <img src="/files/{{$carrito->imagen}}" class="img-thumbnail">
@@ -56,13 +57,14 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-							<input type="hidden" name="txtCarrito" value="{{$carrito->idcarrito}}">
-                                                <button type="submit" class="btn btn-primary" name="btnActualizar">
-                                                    <i class="fa fa-repeat" aria-hidden="true"></i>
+							                    <input type="hidden" name="txtCarrito" value="{{$carrito->idcarrito}}">
+                                                <!--<button type="submit" class="btn btn-primary" name="btnActualizar">
+                                                    <i class="fi-rs-shuffle mr-10" aria-hidden="true"></i>
+                                                </button>-->
+                                                <button type="hidden" class="btn  btn-sm" name="btnBorrar" id="btnBorrar">
+                                                    <i class="fi-rs-trash"></i>
                                                 </button>
-                                                <button type="submit" class="btn btn-danger" name="btnBorrar">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                                </button>
+                                                
                                             </div>
                                         </td>
                                     </form>
@@ -82,6 +84,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -142,5 +145,4 @@
         </div>
     </div>
 </section>
-
 @endsection

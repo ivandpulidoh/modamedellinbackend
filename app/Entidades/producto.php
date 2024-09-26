@@ -17,7 +17,11 @@ class Producto extends Model
 		'cantidad',
 		'precio',
 		'descripcion',
-		'imagen'
+		'imagen',
+		'tallas',
+		'colores',
+		'nombre_marca',
+		'fecha_descripcion'
 	];
 
 	protected $hidden = [];
@@ -31,6 +35,10 @@ class Producto extends Model
 		$this->precio = $request->input('txtPrecio');
 		$this->descripcion = $request->input('txtDescripcion');
 		$this->imagen = $request->input('archivo');
+		$this->tallas = $request->input('txtTallas');
+		$this->colores = $request->input('txtColores');
+		$this->nombre_marca = $request->input('txtMarca');
+		$this->fecha_descripcion = $request->input('txtFechaCreacion');
 	}
 
 	public function obtenerTodos()
@@ -43,7 +51,11 @@ class Producto extends Model
                     A.precio,
                     A.descripcion,
                     A.imagen,
-			B.nombre AS categoria
+			  A.tallas,
+                    A.colores,
+                    A.nombre_marca,
+                    A.fecha_descripcion,
+			B.nombre AS categoria		
                 FROM productos A
 	INNER JOIN tipoproductos B ON A.fk_tipoproducto = B.idtipoproducto
  ORDER BY idproducto ASC";
@@ -60,7 +72,11 @@ class Producto extends Model
             cantidad,
             precio,
             descripcion,
-            imagen
+            imagen,
+		tallas,
+		colores,
+		nombre_marca,
+		fecha_descripcion
         FROM productos WHERE idproducto = ?";
 		$lstRetorno = DB::select($sql, [$idproducto]);
 
@@ -72,7 +88,10 @@ class Producto extends Model
 			$this->precio = $lstRetorno[0]->precio;
 			$this->descripcion = $lstRetorno[0]->descripcion;
 			$this->imagen = $lstRetorno[0]->imagen;
-
+			$this->tallas = $lstRetorno[0]->tallas;
+			$this->colores = $lstRetorno[0]->colores;
+			$this->nombre_marca = $lstRetorno[0]->nombre_marca;
+			$this->fecha_descripcion = $lstRetorno[0]->fecha_descripcion;
 			return $this;
 		}
 		return null;
@@ -86,7 +105,11 @@ class Producto extends Model
                     cantidad=?,
                     precio=?,
                     descripcion=?,
-                    imagen=?
+                    imagen=?,
+			  colores=?,
+			  tallas=?,
+			  nombre_marca=?,
+			  fecha_descripcion=?
                 WHERE idproducto=?";
 		$affected = DB::update($sql, [
 			$this->nombre,
@@ -95,7 +118,11 @@ class Producto extends Model
 			$this->precio,
 			$this->descripcion,
 			$this->imagen,
-			$this->idproducto
+			$this->idproducto,
+			$this->tallas,
+			$this->colores,
+			$this->nombre_marca,
+			$this->fecha_descripcion
 		]);
 	}
 
@@ -109,7 +136,7 @@ class Producto extends Model
 	public function insertar()
 	{
 		try {
-			$sql = "INSERT INTO productos (nombre, fk_tipoproducto, cantidad, precio, descripcion, imagen) VALUES (?, ?, ?, ?, ?, ?)";
+			$sql = "INSERT INTO productos (nombre, fk_tipoproducto, cantidad, precio, descripcion, imagen, tallas, colores, nombre_marca, fecha_descripcion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			$result = DB::insert($sql, [
 				$this->nombre,
 				$this->fk_tipoproducto,
@@ -117,6 +144,10 @@ class Producto extends Model
 				$this->precio,
 				$this->descripcion,
 				$this->imagen,
+				$this->tallas,
+				$this->colores,
+				$this->nombre_marca,
+				$this->fecha_descripcion
 			]);
 			return $this->idproducto = DB::getPdo()->lastInsertId();
 		} catch (\Exception $e) {

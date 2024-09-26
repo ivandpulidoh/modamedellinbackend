@@ -63,7 +63,7 @@ if (isset($msg)) {
 
         <div class="form-group col-lg-6">
             <label>Cantidad: *</label>
-            <input type="text" id="txtCantidad" name="txtCantidad" class="form-control" value="{{ $producto->cantidad }}" required>
+            <input type="number" id="txtCantidad" name="txtCantidad" class="form-control" value="{{ $producto->cantidad }}" required>
         </div>
 
         <div class="form-group col-lg-6">
@@ -81,7 +81,25 @@ if (isset($msg)) {
             <input type="file" name="archivo" id="archivo" class="form-control-file">
             <img src="" alt="">
         </div>
+        <div class="form-group col-lg-6">
+            <label>Tallas: *</label>
+            <input type="text" id="txtTallas" name="txtTallas" class="form-control" value="{{ $producto->tallas }}" required>
+        </div>
+        <div class="form-group col-lg-6">
+            <label>Colores: *</label>
+            <input type="text" id="txtColores" name="txtColores" class="form-control" value="{{ $producto->colores }}" required>
+        </div>
+        <div class="form-group col-lg-6">
+            <label>Nombre Marca: *</label>
+            <input type="text" id="txtMarca" name="txtMarca" class="form-control" value="{{ $producto->nombre_marca }}" required>
+        </div>
+
+        <div class="form-group col-lg-6">
+            <label>Fecha Creación: *</label>
+            <input type="date" id="txtFechaCreacion" name="txtFechaCreacion" class="form-control" value="{{ $producto->fecha_descripcion }}" required readonly>
+        </div>
     </div>
+
 </form>
 
 
@@ -126,6 +144,19 @@ if (isset($msg)) {
             }
         });
     }
+</script>
+<script>
+        // Obtener la fecha actual
+        const hoy = new Date();
+        const año = hoy.getFullYear();
+        const mes = ('0' + (hoy.getMonth() + 1)).slice(-2); // Añadir cero si es necesario
+        const dia = ('0' + hoy.getDate()).slice(-2); // Añadir cero si es necesario
+
+        // Formatear la fecha en formato YYYY-MM-DD
+        const fechaActual = `${año}-${mes}-${dia}`;
+
+        // Establecer el valor del campo de fecha
+        document.getElementById('txtFechaCreacion').value = fechaActual;
 </script>
 
 
